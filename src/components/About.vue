@@ -1,12 +1,12 @@
 <template>
-  <div class="main">
-     This is the main component.
+  <div class="about">
+   About Page
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Main',
+  name: 'About',
     data () {
         return {
         
