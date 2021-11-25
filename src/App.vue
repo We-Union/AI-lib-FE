@@ -31,8 +31,7 @@
         <i class="el-icon-user"></i>
         <span>{{user.nickname}}</span>
       </template>
-      <el-menu-item index="4-1">我的信息</el-menu-item>
-      <el-menu-item index="4-2">登出</el-menu-item>
+      <el-menu-item index="4-1" @click="logout">登出</el-menu-item>
     </el-sub-menu>
   </el-menu>
   <router-view></router-view>
@@ -61,6 +60,36 @@ export default {
             this.user = data.data;
           } else {
             this.logined = false;
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          this.logining = false;
+          this.$alert("" + error, "请求失败", {
+            confirmButtonText: "确定",
+          });
+        });
+    },
+    logout() {
+      const axios = require("axios");
+      axios
+        .get("/user/logout")
+        .then((response) => {
+          console.log(response);
+          var data = response.data;
+          if (data.code == 0) {
+             this.$message({
+              message: "登出成功",
+              type: "success",
+            });
+            this.logined = false;
+           
+            location.reload();
+          } else {
+            this.$message({
+              message: "登出失败",
+              type: "error",
+            });
           }
         })
         .catch((error) => {
