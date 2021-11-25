@@ -18,6 +18,14 @@
           placeholder="用户名"
         ></el-input>
       </el-form-item>
+      <el-form-item prop="nickname">
+        <el-input
+          type="text"
+          v-model="form.nickname"
+          auto-complete="off"
+          placeholder="姓名"
+        ></el-input>
+      </el-form-item>
       <el-form-item prop="password">
         <el-input
           type="password"
@@ -39,12 +47,12 @@
           type="primary"
           style="width: 100%"
           @click="handleSubmit"
-          :loading="logining"
+          :loading="registering"
           >注册</el-button
         >
       </el-form-item>
       <el-form-item>
-        <router-link to="/login">已有账号？转去登录</router-link>
+        <router-link to="/login">已有帐号？转到登录</router-link>
       </el-form-item>
     </el-form>
   </div>
@@ -54,20 +62,17 @@
 export default {
   data() {
     return {
-      logining: false,
+      registering: false,
       form: {
         username: "",
         password: "",
-        repassword: "",
+        nickname: "",
       },
       rules: {
         username: [
           { required: true, message: "请输入用户名", trigger: "blur" },
         ],
         password: [{ required: true, message: "请输入密码", trigger: "blur" }],
-        repassword: [
-          { required: true, message: "请重复您的密码", trigger: "blur" },
-        ],
       },
     };
   },
@@ -76,26 +81,60 @@ export default {
       event;
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
-          this.logining = true;
-          if (
-            this.form.username === "admin" &&
-            this.form.password === "123456"
-          ) {
-            this.logining = false;
-            sessionStorage.setItem("user", this.ruleForm2.username);
-            this.$router.push({ path: "/" });
-          } else {
-            this.logining = false;
-            this.$alert("用户名或密码错误", "提示", {
-              confirmButtonText: "确定",
+          this.registering = true;
+          const axios = require("axios");
+          axios
+            .post("/user/register", {
+              username: this.form.username,
+              password: this.form.password,
+              nickname: this.form.nickname,
+            })
+            .then((response) => {
+              var data = response.data;
+              if (data.code == 0) {
+                this.$message({
+                  message: "注册成功",
+                  type: "success",
+                });
+                this.$router.push("/login");
+              } else {
+                this.registering = false;
+                this.$alert(data.msg, "注册失败", {
+                  confirmButtonText: "确定",
+                });
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+              this.registering = false;
+              this.$alert("" + error, "注册失败", {
+                confirmButtonText: "确定",
+              });
             });
-          }
         } else {
           console.log("error submit!");
           return false;
         }
       });
     },
+  },
+  created() {
+    const axios = require("axios");
+    axios
+      .get("/user/me")
+      .then((response) => {
+        var data = response.data;
+        if (data.code == 0) {
+          this.$router.push("/");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        this.registering = false;
+        this.$alert("" + error, "请求失败", {
+          confirmButtonText: "确定",
+        });
+      });
   },
 };
 </script>
@@ -114,5 +153,9 @@ export default {
   background: #fff;
   border: 1px solid #eaeaea;
   box-shadow: 0 0 25px #cac6c6;
+}
+label.el-checkbox.rememberme {
+  margin: 0px 0px 15px;
+  text-align: left;
 }
 </style>

@@ -53,7 +53,6 @@ export default {
       axios
         .get("/user/me")
         .then((response) => {
-          console.log(response);
           var data = response.data;
           if (data.code == 0) {
             this.logined = true;
@@ -75,16 +74,13 @@ export default {
       axios
         .get("/user/logout")
         .then((response) => {
-          console.log(response);
           var data = response.data;
           if (data.code == 0) {
              this.$message({
               message: "登出成功",
               type: "success",
             });
-            this.logined = false;
-           
-            location.reload();
+            this.checkLogin();
           } else {
             this.$message({
               message: "登出失败",
@@ -104,7 +100,15 @@ export default {
   },
   created() {
     this.checkLogin();
-  }
+  },
+  watch: {
+    $route(to, from) {
+      from;
+      if(to.fullPath == "/main"){
+        this.checkLogin();
+      }
+    },
+  },
 };
 </script>
 

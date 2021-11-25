@@ -72,14 +72,13 @@ export default {
               password: this.form.password,
             })
             .then((response) => {
-              console.log(response);
               var data = response.data;
               if (data.code == 0) {
                 this.$message({
                   message: "登录成功",
                   type: "success",
                 });
-                location.reload();
+                this.$router.push("/");
               } else {
                 this.logining = false;
                 this.$alert(data.msg, "登录失败", {
