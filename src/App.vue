@@ -34,7 +34,9 @@
       <el-menu-item index="4-1" @click="logout">登出</el-menu-item>
     </el-sub-menu>
   </el-menu>
-  <router-view></router-view>
+  <div class="main">
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
@@ -44,7 +46,7 @@ export default {
   data() {
     return {
       logined: false,
-      user: Object,
+      user: Object
     };
   },
   methods: {
@@ -64,9 +66,9 @@ export default {
         .catch((error) => {
           console.log(error);
           this.logining = false;
-          this.$alert("" + error, "请求失败", {
-            confirmButtonText: "确定",
-          });
+          // this.$alert("" + error, "请求失败", {
+          //   confirmButtonText: "确定",
+          // });
         });
     },
     logout() {
@@ -91,9 +93,9 @@ export default {
         .catch((error) => {
           console.log(error);
           this.logining = false;
-          this.$alert("" + error, "请求失败", {
-            confirmButtonText: "确定",
-          });
+          // this.$alert("" + error, "请求失败", {
+          //   confirmButtonText: "确定",
+          // });
         });
     },
     
@@ -128,6 +130,13 @@ a {
 .router-link-active {
   text-decoration: none;
 }
+
+/* .main {
+  background-image: url(https://s2.loli.net/2021/12/04/zBMd1ktDai4cWoZ.jpg);
+  width:100%;
+  height:100%;
+} */
+
 #el-menu {
   width: 100%;
 }

@@ -1,4 +1,8 @@
 <template>
+  <div class="background">
+    <img :src="imgSrc" width="100%" height="100%" alt="" />
+  </div>
+
   <div class="login-container">
     <el-form
       :model="form"
@@ -16,6 +20,7 @@
           v-model="form.username"
           auto-complete="off"
           placeholder="用户名"
+          class="editline"
         ></el-input>
       </el-form-item>
       <el-form-item prop="password">
@@ -46,6 +51,7 @@
 export default {
   data() {
     return {
+      imgSrc:require('../assets/main.jpeg'),
       logining: false,
       form: {
         username: "",
@@ -123,13 +129,23 @@ export default {
 </script>
 
 <style scoped>
+.background{
+    width:100%;  
+    height:100%;  /**宽高100%是为了图片铺满屏幕 */
+    z-index:-1;
+    position: absolute;
+}
+
 .login-container {
   width: 100%;
   height: 100%;
+  z-index: 1;
+  position: absolute;
 }
+
 .login-page {
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+  -webkit-border-radius: 15px;
+  border-radius: 30px;
   margin: 180px auto;
   width: 350px;
   padding: 35px 35px 15px;
@@ -137,6 +153,12 @@ export default {
   border: 1px solid #eaeaea;
   box-shadow: 0 0 25px #cac6c6;
 }
+
+.editline {
+  -webkit-border-radius: 15px;
+  border-radius: 30px;
+}
+
 label.el-checkbox.rememberme {
   margin: 0px 0px 15px;
   text-align: left;

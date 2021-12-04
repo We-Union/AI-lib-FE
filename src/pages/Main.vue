@@ -1,8 +1,134 @@
 <template>
-  <div class="main">
-     This is the main component.
-  </div>
+  <el-row :gutter="20">
+  
+  <el-col :span="7"></el-col>
+  <el-col :span="6">
+  <el-card class="box-card">
+      <template #header>
+        <div class="card-header">
+          <h1>AI赋能通用图像文本处理网站</h1>
+    
+          <el-button class="button" type="text">star我们的github仓库</el-button>
+        </div>
+      </template>
+      <div>
+        <li class="item">本项目的任务提出者：钱品亦，岑嘉诚，黄哲龙，李亚宁。</li>
+        <li class="item">本项目的任务开发者：钱品亦，岑嘉诚，黄哲龙，李亚宁。</li>
+        <li class="item">用户：具有对于文本和图像具有大量通用处理和增强的用户。</li>
+        <li class="item">基本功能：用户完成各种提供的文本图像处理服务，并完成对自定义模型参数的增删筛查。</li>
+        <li class="item">实现该软件的计算中心或计算机网络：南京航空航天大学计算中心。</li>
+      </div>
+    </el-card>
+  </el-col>
+
+  <el-col :span="7"></el-col>
+  
+  </el-row>
+  
+  
+
+ <el-row :gutter="20" style="margin:30px" justify="space-around" >
+    <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+    <el-col :span="3">
+      <el-card :body-style="{ padding: '0px' }" style="border-radius: 30px">
+         <img
+          src="https://s2.loli.net/2021/12/04/ZrfINDtOw167jUy.jpg"
+          class="image"
+        />
+          <div style="padding: 14px">
+            <span>Kirigaya</span>
+            <div class="bottom">
+              <p class="intro">研究领域：计算机视觉，计算机听觉，智能机器人</p>
+              <el-button type="text" class="button">个人主页</el-button>
+            </div>
+        </div>
+      </el-card>
+    </el-col>
+
+    <el-col :span="3">
+      <el-card :body-style="{ padding: '0px' }" style="border-radius: 30px">
+         <img
+          src="https://s2.loli.net/2021/12/04/ZrfINDtOw167jUy.jpg"
+          class="image"
+        />
+      </el-card>
+    </el-col>
+
+    <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+  </el-row>
+
+ <el-row :gutter="20" style="margin:30px" justify="space-around">
+    <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+    <el-col :span="3">
+      <el-card :body-style="{ padding: '0px' }" style="border-radius: 30px">
+         <img
+          src="https://s2.loli.net/2021/12/04/ZrfINDtOw167jUy.jpg"
+          class="image"
+        />
+      </el-card>
+    </el-col>
+
+    <el-col :span="3">
+      <el-card :body-style="{ padding: '0px' }" style="border-radius: 30px">
+         <img
+          src="https://s2.loli.net/2021/12/04/ZrfINDtOw167jUy.jpg"
+          class="image"
+        />
+      </el-card>
+    </el-col>
+
+    <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+  </el-row>
+
+
 </template>
+
+
+<style lang="css">
+.box-fa {
+  text-align: center;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item {
+  float: left;
+  line-height: 2.0;
+}
+
+.text {
+  font-size: 14px;
+}
+
+.box-card {
+  width: 720px;
+  margin: 30px;
+  border-radius: 30px;
+}
+
+.image {
+  display: block;
+  height: 240px;
+}
+
+.bottom {
+  margin-top: 13px;
+  line-height: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.intro {
+  line-height: 1.5;
+  color:"#070707";
+}
+
+</style>
 
 <script>
 export default {
