@@ -6,7 +6,6 @@
         <template #header>
           <div class="card-header">
             <h1>AI赋能通用图像文本处理网站</h1>
-
             <a href="https://github.com/We-Union/AI-lib-FE" target="_blank"
               >star我们的github仓库</a
             >
@@ -59,10 +58,7 @@
     </el-col>
     <el-col :span="3">
       <el-card :body-style="{ padding: '0px' }" style="border-radius: 30px">
-        <img
-          src="https://s4.ax1x.com/2021/12/06/oyY0ED.jpg"
-          class="image"
-        />
+        <img src="https://s4.ax1x.com/2021/12/06/oyY0ED.jpg" class="image" />
         <div style="padding: 14px">
           <span>PeaceSheep</span>
           <div class="bottom">

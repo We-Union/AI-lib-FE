@@ -8,6 +8,7 @@ import Main from './pages/Main.vue'
 import About from './pages/About.vue'
 import Login from './pages/Login.vue'
 import Register from './pages/Register.vue' 
+import FaceDetection from './pages/FaceDetection.vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
  
 
@@ -18,6 +19,7 @@ const routes = [
     { path: '/about', component: About },
     { path: '/login', component: Login },
     { path: '/register', component: Register },
+    { path: '/facedetection', component: FaceDetection },
   ]
 
 const router = createRouter({
