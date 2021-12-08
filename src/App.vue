@@ -69,10 +69,9 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          this.logining = false;
-          // this.$alert("" + error, "请求失败", {
-          //   confirmButtonText: "确定",
-          // });
+          this.$alert("" + error, "请求失败", {
+            confirmButtonText: "确定",
+          });
         });
     },
     logout() {
@@ -96,10 +95,9 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          this.logining = false;
-          // this.$alert("" + error, "请求失败", {
-          //   confirmButtonText: "确定",
-          // });
+          this.$alert("" + error, "请求失败", {
+            confirmButtonText: "确定",
+          });
         });
     },
   },

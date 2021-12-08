@@ -79,12 +79,21 @@
 
   <el-row :gutter="20" style="margin: 30px" justify="space-around">
     <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-    <el-col :span="3">
+      <el-col :span="3">
       <el-card :body-style="{ padding: '0px' }" style="border-radius: 30px">
-        <img
-          src="https://s2.loli.net/2021/12/04/ZrfINDtOw167jUy.jpg"
-          class="image"
-        />
+        <img src="https://s4.ax1x.com/2021/12/07/ogm0J0.png" class="image" />
+        <div style="padding: 14px">
+          <span>Ereshkigal</span>
+          <div class="bottom">
+            <p class="intro">研究领域：Langlands纲领</p>
+            <br />
+            <p>
+              <a href="https://github.com/Temperance-XIV" target="_blank"
+                >个人主页</a
+              >
+            </p>
+          </div>
+        </div>
       </el-card>
     </el-col>
 
@@ -131,6 +140,10 @@
 .image {
   display: block;
   height: 240px;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .bottom {
