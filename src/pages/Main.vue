@@ -79,7 +79,7 @@
 
   <el-row :gutter="20" style="margin: 30px" justify="space-around">
     <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-      <el-col :span="3">
+    <el-col :span="3">
       <el-card :body-style="{ padding: '0px' }" style="border-radius: 30px">
         <img src="https://s4.ax1x.com/2021/12/07/ogm0J0.png" class="image" />
         <div style="padding: 14px">
@@ -97,14 +97,24 @@
       </el-card>
     </el-col>
 
-    <el-col :span="3">
+     <el-col :span="3">
       <el-card :body-style="{ padding: '0px' }" style="border-radius: 30px">
-        <img
-          src="https://s2.loli.net/2021/12/04/ZrfINDtOw167jUy.jpg"
-          class="image"
-        />
+        <img src="https://s4.ax1x.com/2021/12/08/o2tNQJ.jpg" class="image" />
+        <div style="padding: 14px">
+          <span>qianpinyi</span>
+          <div class="bottom">
+            <p class="intro">研究领域：编译原理、操作系统</p>
+            <br />
+            <p>
+              <a href="https://github.com/qianpinyi" target="_blank"
+                >个人主页</a
+              >
+            </p>
+          </div>
+        </div>
       </el-card>
     </el-col>
+
 
     <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
   </el-row>

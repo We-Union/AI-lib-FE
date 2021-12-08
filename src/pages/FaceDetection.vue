@@ -9,6 +9,7 @@
     >
     </el-option>
   </el-select>
+  <el-button type="primary" @click="useDefault">使用默认参数</el-button>
   <br />
   <el-input
     v-model="current_params"
@@ -20,7 +21,7 @@
     <div class="json-editor-button">
       <br />
       <el-button type="primary" @click="save">保存</el-button>
-      <el-button type="warning" @click="reset">重置</el-button>
+      <el-button type="warning" @click="delete_params">删除</el-button>
     </div>
   </div>
   <div>
@@ -33,6 +34,7 @@ export default {
   components: {},
   data: () => ({
     current_params: Object(),
+    default_params: Object(),
     params_list: Array(),
     model:"face_detection",
   }),
@@ -47,10 +49,7 @@ export default {
         .then((response) => {
           var data = response.data;
           if (data.code == 0) {
-            for (var i = 0; i < data.data.length; i++) {
-              console.log(data.data[i]);
-              this.params_list.push(data.data[i]);
-            }
+            this.params_list = data.data;
             //   console.log(this.params_list);
           } else {
             this.$message({
@@ -72,7 +71,7 @@ export default {
         .then((response) => {
           var data = response.data;
           if (data.code == 0) {
-            this.params_list.push(data.data);
+            this.default_params = data.data;
           } else {
             this.$message({
               message: data.msg,
@@ -113,6 +112,9 @@ export default {
             confirmButtonText: "确定",
           });
         });
+    },
+    useDefault() {
+      this.current_params = this.default_params;
     },
   },
   created() {
