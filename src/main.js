@@ -9,6 +9,7 @@ import About from './pages/About.vue'
 import Login from './pages/Login.vue'
 import Register from './pages/Register.vue' 
 import FaceDetection from './pages/FaceDetection.vue'
+import Emotion from './pages/Emotion.vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
  
 
@@ -20,6 +21,7 @@ const routes = [
     { path: '/login', component: Login },
     { path: '/register', component: Register },
     { path: '/facedetection', component: FaceDetection },
+    { path: '/emotion', component: Emotion },
   ]
 
 const router = createRouter({

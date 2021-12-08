@@ -21,8 +21,8 @@
           <i class="el-icon-document"></i>
           <span>自然语言处理</span>
         </template>
-        <router-link to="/facedetection">
-          <el-menu-item index="3-1">人脸识别</el-menu-item></router-link
+        <router-link to="/emotion">
+          <el-menu-item index="3-1">文本情绪分析</el-menu-item></router-link
         >
       </el-sub-menu>
       <router-link to="/about">
