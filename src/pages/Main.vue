@@ -99,7 +99,7 @@
 
      <el-col :span="3">
       <el-card :body-style="{ padding: '0px' }" style="border-radius: 30px">
-        <img src="https://s4.ax1x.com/2021/12/08/o2tNQJ.jpg" class="image" />
+        <img src="https://s4.ax1x.com/2021/12/08/oRH336.jpg" class="image" />
         <div style="padding: 14px">
           <span>qianpinyi</span>
           <div class="bottom">

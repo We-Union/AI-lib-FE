@@ -9,27 +9,35 @@
       </router-link>
       <el-sub-menu index="2">
         <template #title>
-          <i class="el-icon-location"></i>
+          <i class="el-icon-camera"></i>
           <span>视觉算法</span>
         </template>
         <router-link to="/facedetection">
-          <el-menu-item index="1-1">人脸识别</el-menu-item></router-link
+          <el-menu-item index="2-1">人脸识别</el-menu-item></router-link
         >
-        <el-menu-item index="1-2">目标识别</el-menu-item>
+      </el-sub-menu>
+          <el-sub-menu index="3">
+        <template #title>
+          <i class="el-icon-document"></i>
+          <span>自然语言处理</span>
+        </template>
+        <router-link to="/facedetection">
+          <el-menu-item index="3-1">人脸识别</el-menu-item></router-link
+        >
       </el-sub-menu>
       <router-link to="/about">
-        <el-menu-item index="3">
-          <i class="el-icon-document"></i>
+        <el-menu-item index="4">
+          <i class="el-icon-location"></i>
           <span>关于</span>
         </el-menu-item>
       </router-link>
       <router-link to="/login">
-        <el-menu-item index="4" v-if="!logined">
+        <el-menu-item index="5" v-if="!logined">
           <i class="el-icon-user"></i>
           <span>登录/注册</span>
         </el-menu-item>
       </router-link>
-      <el-sub-menu index="4" v-if="logined">
+      <el-sub-menu index="4" v-if="logined" style="margin-right:5%">
         <template #title>
           <i class="el-icon-user"></i>
           <span>{{ user.nickname }}</span>
