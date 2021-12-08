@@ -35,7 +35,7 @@
   </div>
   <br />
   <div class="image-container">
-    <el-image :src="img_src" style="width: 50%; " :fit="fit">
+    <el-image :src="img_src" style="width: 50%" :fit="fit">
       <template #error>
         <div class="image-slot">
           <el-icon><icon-picture /></el-icon>
@@ -143,6 +143,7 @@ export default {
         .post("/analyse", {
           model: this.model,
           parameter: this.current_params,
+          data: this.img_src,
         })
         .then((response) => {
           var data = response.data;
@@ -168,12 +169,29 @@ export default {
       this.$refs.upload.submit();
     },
     handleSuccess(response, file, fileList) {
-      this.img_src = "/api/image/download?file=" + response.data;
+      var data = response;
+      if (data.code == 0) {
+         this.img_src = "/api/image/download?file=" + response.data;
+        this.$message({
+          message: "上传成功",
+          type: "success",
+        });
+      } else {
+        this.$message({
+          message: data.msg,
+          type: "error",
+        });
+      }
+     
       console.log(response);
       console.log(file);
       console.log(fileList);
     },
     handleError(err, file, fileList) {
+          this.$message({
+          message: err,
+          type: "error",
+        });
       console.log(err);
       console.log(file);
       console.log(fileList);
