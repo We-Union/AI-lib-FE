@@ -12,8 +12,8 @@
           <i class="el-icon-camera"></i>
           <span>视觉算法</span>
         </template>
-        <router-link to="/facedetection">
-          <el-menu-item index="2-1">人脸识别</el-menu-item></router-link
+        <router-link to="/painting">
+          <el-menu-item index="2-1">图片手绘风格转换</el-menu-item></router-link
         >
       </el-sub-menu>
           <el-sub-menu index="3">

@@ -75,6 +75,22 @@
   <div>
     <el-button type="primary" @click="analyse">分析</el-button>
   </div>
+  <div class="result-container">
+    <el-image :src="result.output_img_url" style="width: 50%" :fit="fit">
+      <template #error>
+        <div class="image-slot">
+          <el-icon><icon-picture /></el-icon>
+        </div>
+      </template>
+      </el-image>
+  </div>
+   <el-input
+        v-model="result.output_text"
+        :rows="10"
+        type="textarea"
+        placeholder="result"
+      />
+
 </template>
 
 <script>
@@ -83,9 +99,11 @@ export default {
   data: () => ({
     current_params: Object(),
     params_list: Array(),
-    model: "face_detection",
+    model: "transform_to_painting",
     file_num: 1,
     img_src: "",
+    upload_array:Array(),
+    result:Object(),
   }),
 
   methods: {
@@ -138,20 +156,23 @@ export default {
     },
     delete_params() {},
     analyse() {
+      this.upload_array = [];
+      this.upload_array.push( "http://"+window.location.host+this.img_src);
       const axios = require("axios");
       axios
-        .post("/analyse", {
+        .post("/analyse/", {
           model: this.model,
           parameter: this.current_params,
-          data: this.img_src,
+          data: this.upload_array.toString(),
         })
         .then((response) => {
           var data = response.data;
           if (data.code == 0) {
             this.$message({
-              message: data.msg,
+              message: "分析成功",
               type: "success",
             });
+            this.result = data;
           } else {
             this.$message({
               message: data.msg,
