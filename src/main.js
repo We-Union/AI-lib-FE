@@ -13,7 +13,8 @@ import Emotion from './pages/Emotion.vue'
 import Reconstruct from './pages/Reconstruct.vue'
 import Scanning from './pages/Scanning.vue'
 import SiftMatching from './pages/SiftMatching.vue'
-
+import AddPara from './pages/AddPara.vue'
+import MyPara from './pages/MyPara.vue'
 
 import { createRouter, createWebHashHistory } from 'vue-router'
  
@@ -30,6 +31,8 @@ const routes = [
     { path: '/reconstruct', component: Reconstruct },
     { path: '/scanning', component: Scanning },
     { path: '/siftmatching', component: SiftMatching },
+    { path: '/addpara', component: AddPara },
+    { path: '/mypara', component: MyPara },
   ]
 
 const router = createRouter({

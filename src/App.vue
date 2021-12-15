@@ -53,6 +53,18 @@
         </template>
         <el-menu-item index="4-1" @click="logout">登出</el-menu-item>
       </el-sub-menu>
+      <el-sub-menu index="5" v-if="logined">
+        <template #title>
+          <i class="el-icon-camera"></i>
+          <span>参数管理</span>
+        </template>
+        <router-link to="/mypara">
+          <el-menu-item index="5-1">我的参数</el-menu-item></router-link
+        >
+          <router-link to="/addpara">
+          <el-menu-item index="5-2">新建参数</el-menu-item></router-link
+        >
+      </el-sub-menu>
     </el-menu>
     <div class="main-view">
       <router-view></router-view>
@@ -158,7 +170,5 @@ a {
 #el-menu {
   width: 100%;
 }
-#login-button {
-  padding-right: 20px;
-}
+
 </style>
