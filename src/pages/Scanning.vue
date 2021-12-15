@@ -95,7 +95,7 @@ export default {
   data: () => ({
     current_params: Object(),
     params_list: Array(),
-    model: "transform_to_painting",
+    model: "scanning",
     file_num: 1,
     img_src: "",
     upload_array:Array(),

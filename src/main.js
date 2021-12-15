@@ -10,6 +10,11 @@ import Login from './pages/Login.vue'
 import Register from './pages/Register.vue' 
 import Painting from './pages/Painting.vue'
 import Emotion from './pages/Emotion.vue'
+import Reconstruct from './pages/Reconstruct.vue'
+import Scanning from './pages/Scanning.vue'
+import SiftMatching from './pages/SiftMatching.vue'
+
+
 import { createRouter, createWebHashHistory } from 'vue-router'
  
 
@@ -22,6 +27,9 @@ const routes = [
     { path: '/register', component: Register },
     { path: '/emotion', component: Emotion },
     { path: '/painting', component: Painting },
+    { path: '/reconstruct', component: Reconstruct },
+    { path: '/scanning', component: Scanning },
+    { path: '/siftmatching', component: SiftMatching },
   ]
 
 const router = createRouter({

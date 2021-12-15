@@ -15,6 +15,15 @@
         <router-link to="/painting">
           <el-menu-item index="2-1">图片手绘风格转换</el-menu-item></router-link
         >
+          <router-link to="/scanning">
+          <el-menu-item index="2-2">文档扫描</el-menu-item></router-link
+        >
+          <router-link to="/sift_matching">
+          <el-menu-item index="2-3">图片匹配</el-menu-item></router-link
+        >
+          <router-link to="/reconstruct ">
+          <el-menu-item index="2-4">高分辨率重建</el-menu-item></router-link
+        >
       </el-sub-menu>
           <el-sub-menu index="3">
         <template #title>

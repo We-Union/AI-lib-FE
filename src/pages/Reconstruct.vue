@@ -95,7 +95,7 @@ export default {
   data: () => ({
     current_params: Object(),
     params_list: Array(),
-    model: "transform_to_painting",
+    model: "reconstruct",
     file_num: 1,
     img_src: "",
     upload_array:Array(),
@@ -153,6 +153,10 @@ export default {
     },
     delete_params() {},
     analyse() {
+      this.$message({
+              message: "正在分析，该项操作可能需要一定时间，请耐心等待",
+              type: "success",
+            });
       this.analyse_loading = true;
       this.upload_array = [];
       this.upload_array.push( "http://"+window.location.host+this.img_src);

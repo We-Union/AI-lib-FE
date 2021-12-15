@@ -64,12 +64,11 @@
         type="textarea"
         placeholder="Please input"
       />
-
     </div>
   </div>
 
   <div>
-    <el-button type="primary" @click="analyse" :loading="analyse_loading">分析</el-button>
+    <el-button type="primary" @click="analyse">分析</el-button>
   </div>
   <div class="result-container">
     <el-image :src="result.output_img_url" style="width: 50%" :fit="fit">
@@ -95,12 +94,11 @@ export default {
   data: () => ({
     current_params: Object(),
     params_list: Array(),
-    model: "transform_to_painting",
+    model: "sift_matching",
     file_num: 1,
     img_src: "",
     upload_array:Array(),
     result:Object(),
-    analyse_loading:false,
   }),
 
   methods: {
@@ -153,7 +151,6 @@ export default {
     },
     delete_params() {},
     analyse() {
-      this.analyse_loading = true;
       this.upload_array = [];
       this.upload_array.push( "http://"+window.location.host+this.img_src);
       const axios = require("axios");
@@ -164,7 +161,6 @@ export default {
           data: this.upload_array.toString(),
         })
         .then((response) => {
-          this.analyse_loading = false;
           var data = response.data;
           if (data.code == 0) {
             this.$message({
@@ -173,7 +169,6 @@ export default {
             });
             this.result = data;
           } else {
-            this.analyse_loading = false;
             this.$message({
               message: data.msg,
               type: "error",
@@ -187,7 +182,6 @@ export default {
         });
     },
     submitUpload() {
-    
       this.$refs.upload.submit();
     },
     handleSuccess(response, file, fileList) {
