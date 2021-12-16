@@ -28,7 +28,7 @@
         v-model="current_params"
         :rows="10"
         type="textarea"
-        placeholder="Please input"
+        placeholder="选择参数"
       />
       <div class="json-editor-button">
         <br />
@@ -47,7 +47,7 @@
 export default {
   components: {},
   data: () => ({
-    current_params: Object(),
+    current_params:  "",
     params_list: Array(),
     model: "face_detection",
     file_num: 1,

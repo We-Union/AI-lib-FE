@@ -35,7 +35,7 @@
   </div>
   <br />
   <div class="image-container">
-    <el-image :src="img_src" style="width: 50%" :fit="fit">
+    <el-image :src="img_src" style="width: 50%">
       <template #error>
         <div class="image-slot">
           <el-icon><icon-picture /></el-icon>
@@ -62,7 +62,7 @@
         v-model="current_params"
         :rows="10"
         type="textarea"
-        placeholder="Please input"
+        placeholder="选择参数"
       />
 
     </div>
@@ -72,7 +72,7 @@
     <el-button type="primary" @click="analyse" :loading="analyse_loading">分析</el-button>
   </div>
   <div class="result-container">
-    <el-image :src="result.output_img_url" style="width: 50%" :fit="fit">
+    <el-image :src="result.output_img_url" style="width: 50%" >
       <template #error>
         <div class="image-slot">
           <el-icon><icon-picture /></el-icon>
@@ -93,7 +93,7 @@
 export default {
   components: {},
   data: () => ({
-    current_params: Object(),
+    current_params:  "",
     params_list: Array(),
     model: "reconstruct",
     file_num: 1,

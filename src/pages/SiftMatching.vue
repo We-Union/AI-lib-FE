@@ -40,7 +40,7 @@
       :key="src"
       :src="src"
       style="width: 50%"
-      :fit="fit"
+    
     >
       <template #error>
         <div class="image-slot">
@@ -68,7 +68,7 @@
         v-model="current_params"
         :rows="10"
         type="textarea"
-        placeholder="Please input"
+        placeholder="选择参数"
       />
     </div>
   </div>
@@ -80,7 +80,7 @@
   </div>
   <br />
   <div class="result-container">
-    <el-image :src="result.output_img_url" style="width: 80%" :fit="fit">
+    <el-image :src="result.output_img_url" style="width: 80%">
       <template #error>
         <div class="image-slot">
           <el-icon><icon-picture /></el-icon>
@@ -100,7 +100,7 @@
 export default {
   components: {},
   data: () => ({
-    current_params: Object(),
+    current_params:  "",
     params_list: Array(),
     model: "sift_matching",
     file_num: 2,
