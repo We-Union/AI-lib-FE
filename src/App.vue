@@ -3,7 +3,7 @@
     <el-menu default-active="1" class="el-menu" mode="horizontal">
       <router-link to="/main">
         <el-menu-item index="1">
-          <i class="el-icon-document"></i>
+          <i class="el-icon-house"></i>
           <span>主页</span>
         </el-menu-item>
       </router-link>
@@ -50,7 +50,7 @@
       </el-sub-menu>
       <el-sub-menu index="5" v-if="logined">
         <template #title>
-          <i class="el-icon-camera"></i>
+          <i class="el-icon-files"></i>
           <span>参数管理</span>
         </template>
         <router-link to="/mypara">
