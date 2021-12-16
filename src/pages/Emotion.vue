@@ -37,9 +37,18 @@
       </div>
     </div>
   </div>
-
+  <br />  <br />
   <div>
     <el-button type="primary" @click="analyse">分析</el-button>
+  </div>
+    <br />  
+  <div> 
+      <el-input
+        v-model="result"
+        :rows="10"
+        type="textarea"
+        placeholder="分析结果"
+      />
   </div>
 </template>
 
@@ -49,9 +58,10 @@ export default {
   data: () => ({
     current_params:  "",
     params_list: Array(),
-    model: "face_detection",
+    model: "emotion",
     file_num: 1,
     text: "",
+    result:"",
   }),
 
   methods: {
