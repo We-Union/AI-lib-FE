@@ -35,7 +35,13 @@
   </div>
   <br />
   <div class="image-container">
-    <el-image :src="img_src" style="width: 50%" :fit="fit">
+    <el-image
+      v-for="src in img_src"
+      :key="src"
+      :src="src"
+      style="width: 50%"
+      :fit="fit"
+    >
       <template #error>
         <div class="image-slot">
           <el-icon><icon-picture /></el-icon>
@@ -66,26 +72,28 @@
       />
     </div>
   </div>
-
+  <br />
   <div>
-    <el-button type="primary" @click="analyse">分析</el-button>
+    <el-button type="primary" @click="analyse" :loading="analyse_loading"
+      >分析</el-button
+    >
   </div>
+  <br />
   <div class="result-container">
-    <el-image :src="result.output_img_url" style="width: 50%" :fit="fit">
+    <el-image :src="result.output_img_url" style="width: 80%" :fit="fit">
       <template #error>
         <div class="image-slot">
           <el-icon><icon-picture /></el-icon>
         </div>
       </template>
-      </el-image>
+    </el-image>
   </div>
-   <el-input
-        v-model="result.output_text"
-        :rows="10"
-        type="textarea"
-        placeholder="result"
-      />
-
+  <el-input
+    v-model="result.output_text"
+    :rows="10"
+    type="textarea"
+    placeholder="result"
+  />
 </template>
 
 <script>
@@ -95,10 +103,10 @@ export default {
     current_params: Object(),
     params_list: Array(),
     model: "sift_matching",
-    file_num: 1,
-    img_src: "",
-    upload_array:Array(),
-    result:Object(),
+    file_num: 2,
+    img_src: Array(),
+    result: Object(),
+    analyse_loading: false,
   }),
 
   methods: {
@@ -151,16 +159,27 @@ export default {
     },
     delete_params() {},
     analyse() {
-      this.upload_array = [];
-      this.upload_array.push( "http://"+window.location.host+this.img_src);
+      if (this.img_src.length != this.file_num) {
+        this.$message({
+          message: "请上传" + this.file_num + "张图片",
+          type: "error",
+        });
+        return;
+      }
+        this.$message({
+              message: "正在分析，该项操作可能需要一定时间，请耐心等待",
+              type: "success",
+            });
+      this.analyse_loading = true;
       const axios = require("axios");
       axios
         .post("/analyse/", {
           model: this.model,
           parameter: this.current_params,
-          data: this.upload_array.toString(),
+          data: this.img_src.toString(),
         })
         .then((response) => {
+          this.analyse_loading = false;
           var data = response.data;
           if (data.code == 0) {
             this.$message({
@@ -176,18 +195,22 @@ export default {
           }
         })
         .catch((error) => {
+          this.analyse_loading = false;
           this.$alert("" + error, "请求失败", {
             confirmButtonText: "确定",
           });
         });
     },
     submitUpload() {
+      this.img_src = [];
       this.$refs.upload.submit();
     },
     handleSuccess(response, file, fileList) {
       var data = response;
       if (data.code == 0) {
-         this.img_src = "/api/image/download?file=" + response.data;
+        this.img_src.push(
+          "http://localhost:8000/image/download?file=" + response.data
+        );
         this.$message({
           message: "上传成功",
           type: "success",
@@ -198,16 +221,16 @@ export default {
           type: "error",
         });
       }
-     
+
       console.log(response);
       console.log(file);
       console.log(fileList);
     },
     handleError(err, file, fileList) {
-          this.$message({
-          message: err,
-          type: "error",
-        });
+      this.$message({
+        message: err,
+        type: "error",
+      });
       console.log(err);
       console.log(file);
       console.log(fileList);
