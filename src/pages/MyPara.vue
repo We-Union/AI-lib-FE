@@ -39,12 +39,12 @@
         v-model="select_params.value"
         :rows="10"
         type="textarea"
-        placeholder="选择参数"
+        placeholder="参数"
       />
     </div>
     <br />
     <div class="button">
-      <el-button @click="savePara()" type="primary">保存参数</el-button>
+      <el-button @click="updatePara()" type="primary">更新参数</el-button>
       <el-button @click="deletePara()" type="danger">删除参数</el-button>
     </div>
   </div>
@@ -127,8 +127,34 @@ export default {
           });
         });
     },
-    change_para(val) {
-      console.log(val);
+   updatePara() {
+      const axios = require("axios");
+      axios
+        .put("/parameter/update", {
+          id: this.select_params.id,
+          value: this.select_params.value,
+          })
+        .then((response) => {
+          var data = response.data;
+          if (data.code == 0) {
+            this.$message({
+              message: "保存成功",
+              type: "success",
+            });
+            this.result = data;
+          } else {
+            this.$message({
+              message: data.msg,
+              type: "error",
+            });
+          }
+        })
+        .catch((error) => {
+          this.analyse_loading = false;
+          this.$alert("" + error, "请求失败", {
+            confirmButtonText: "确定",
+          });
+        });
     },
   },
 };

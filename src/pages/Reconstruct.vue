@@ -49,17 +49,17 @@
     <el-select v-model="current_params" placeholder="选择参数">
       <el-option
         v-for="item in params_list"
-        :key="item.value"
+        :key="item.id"
         :label="item.name"
-        :value="item.value"
+        :value="item"
       >
       </el-option>
     </el-select>
     <br />
-
+ <br />
     <div class="json-editor">
       <el-input
-        v-model="current_params"
+        v-model="current_params.value"
         :rows="10"
         type="textarea"
         placeholder="选择参数"
@@ -67,10 +67,11 @@
 
     </div>
   </div>
-
+ <br />
   <div>
     <el-button type="primary" @click="analyse" :loading="analyse_loading">分析</el-button>
   </div>
+  <br />
   <div class="result-container">
     <el-image :src="result.output_img_url" style="width: 50%" >
       <template #error>
@@ -164,7 +165,7 @@ export default {
       axios
         .post("/analyse/", {
           model: this.model,
-          parameter: this.current_params,
+          parameter: this.current_params.value,
           data: this.upload_array.toString(),
         })
         .then((response) => {

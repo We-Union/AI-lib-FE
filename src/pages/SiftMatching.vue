@@ -55,17 +55,17 @@
     <el-select v-model="current_params" placeholder="选择参数">
       <el-option
         v-for="item in params_list"
-        :key="item.value"
+        :key="item.id"
         :label="item.name"
-        :value="item.value"
+        :value="item"
       >
       </el-option>
     </el-select>
     <br />
-
+<br />
     <div class="json-editor">
       <el-input
-        v-model="current_params"
+        v-model="current_params.value"
         :rows="10"
         type="textarea"
         placeholder="选择参数"
@@ -175,7 +175,7 @@ export default {
       axios
         .post("/analyse/", {
           model: this.model,
-          parameter: this.current_params,
+          parameter: this.current_params.value,
           data: this.img_src.toString(),
         })
         .then((response) => {

@@ -17,7 +17,10 @@
     <br />
     <el-input v-model="name" placeholder="模型名称" />
     <br />
+    <br />
     输入参数：
+    <br />
+    <br />
     <el-input
       v-model="params"
       :rows="10"
