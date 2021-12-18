@@ -31,7 +31,6 @@
       </el-card>
     </el-col>
 
-    <el-col :span="7"></el-col>
   </el-row>
 
   <el-row :gutter="20" style="margin: 30px" justify="space-around">
