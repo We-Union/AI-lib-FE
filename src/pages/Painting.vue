@@ -47,8 +47,6 @@
   
   <div class="parameter-select">
     选择参数：
-     <br />
-      <br />
     <el-select v-model="current_params" placeholder="选择参数">
       <el-option
         v-for="item in params_list"
