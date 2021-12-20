@@ -6,7 +6,7 @@
         <template #header>
           <div class="card-header">
             <h1>AI赋能通用图像文本处理网站</h1>
-            <a href="https://github.com/We-Union/AI-lib-FE" target="_blank"
+            <a href="https://github.com/We-Union/AIlib-algorithm" target="_blank"
               >star我们的github仓库</a
             >
           </div>
