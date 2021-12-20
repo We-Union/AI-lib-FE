@@ -24,6 +24,24 @@
         <router-link to="/siftmatching">
           <el-menu-item index="2-4">图片匹配</el-menu-item></router-link
         >
+        <router-link to="/stitching">
+          <el-menu-item index="2-5">图像拼接</el-menu-item></router-link
+        >
+         <router-link to="/detectface">
+          <el-menu-item index="2-6">人脸检测</el-menu-item></router-link
+        >
+          <router-link to="/ocrprint">
+          <el-menu-item index="2-7">打印体识别</el-menu-item></router-link
+        >
+          <router-link to="/ocrval">
+          <el-menu-item index="2-8">验证码识别</el-menu-item></router-link
+        >
+           <router-link to="/equalizehist">
+          <el-menu-item index="2-9">直方图均衡化</el-menu-item></router-link
+        >
+         <router-link to="/ostusplit">
+          <el-menu-item index="2-10">大津阈值法</el-menu-item></router-link
+        >
       </el-sub-menu>
       <el-sub-menu index="3">
         <template #title>
