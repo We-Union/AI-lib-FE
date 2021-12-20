@@ -15,9 +15,9 @@
     <el-select v-model="current_params" placeholder="选择参数">
       <el-option
         v-for="item in params_list"
-        :key="item.value"
+        :key="item.id"
         :label="item.name"
-        :value="item.value"
+        :value="item"
       >
       </el-option>
     </el-select>
@@ -25,16 +25,11 @@
     <br />
     <div class="json-editor">
       <el-input
-        v-model="current_params"
+        v-model="current_params.value"
         :rows="10"
         type="textarea"
         placeholder="选择参数"
       />
-      <div class="json-editor-button">
-        <br />
-        <el-button type="primary" @click="save">保存</el-button>
-        <el-button type="warning" @click="reset">重置</el-button>
-      </div>
     </div>
   </div>
   <br />  <br />
@@ -44,7 +39,7 @@
     <br />  
   <div> 
       <el-input
-        v-model="result"
+        v-model="output_text"
         :rows="10"
         type="textarea"
         placeholder="分析结果"
@@ -58,10 +53,10 @@ export default {
   data: () => ({
     current_params:  "",
     params_list: Array(),
-    model: "emotion",
+    model: "kanji_cut",
     file_num: 1,
     text: "",
-    result:"",
+    output_text:"",
   }),
 
   methods: {
@@ -118,14 +113,15 @@ export default {
       axios
         .post("/analyse", {
           model: this.model,
-          parameter: this.current_params,
+          parameter: this.current_params.value,
           data: this.text,
         })
         .then((response) => {
           var data = response.data;
+          this.output_text = data.output_text;
           if (data.code == 0) {
-            this.$message({
-              message: data.msg,
+             this.$message({
+              message: "分析成功",
               type: "success",
             });
           } else {

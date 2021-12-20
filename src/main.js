@@ -8,19 +8,24 @@ import Main from './pages/Main.vue'
 import About from './pages/About.vue'
 import Login from './pages/Login.vue'
 import Register from './pages/Register.vue' 
-import Painting from './pages/Painting.vue'
-import Emotion from './pages/Emotion.vue'
-import Reconstruct from './pages/Reconstruct.vue'
-import Scanning from './pages/Scanning.vue'
-import SiftMatching from './pages/SiftMatching.vue'
+import SiftMatching from './pages/cv/SiftMatching.vue'
 import AddPara from './pages/AddPara.vue'
 import MyPara from './pages/MyPara.vue'
-import Stitching from './pages/Stitching.vue'
-import DetectFace from './pages/DetectFace.vue'
-import OcrPrint from './pages/OcrPrint.vue'
-import OcrVal from './pages/OcrVal.vue'
-import EqualizeHist from './pages/EqualizeHist.vue'
-import OSTUSplit from './pages/OSTUSplit.vue'
+
+
+
+import Painting from './pages/cv/Painting.vue'
+import Reconstruct from './pages/cv/Reconstruct.vue'
+import Scanning from './pages/cv/Scanning.vue'
+import Stitching from './pages/cv/Stitching.vue'
+import DetectFace from './pages/cv/DetectFace.vue'
+import OcrPrint from './pages/cv/OcrPrint.vue'
+import OcrVal from './pages/cv/OcrVal.vue'
+import EqualizeHist from './pages/cv/EqualizeHist.vue'
+import OSTUSplit from './pages/cv/OSTUSplit.vue'
+
+
+import KanjiCut from './pages/nlp/KanjiCut.vue'
 
 import { createRouter, createWebHashHistory } from 'vue-router'
  
@@ -32,19 +37,22 @@ const routes = [
     { path: '/about', component: About },
     { path: '/login', component: Login },
     { path: '/register', component: Register },
-    { path: '/emotion', component: Emotion },
+    { path: '/addpara', component: AddPara },
+    { path: '/mypara', component: MyPara },
+
     { path: '/painting', component: Painting },
     { path: '/reconstruct', component: Reconstruct },
     { path: '/scanning', component: Scanning },
     { path: '/siftmatching', component: SiftMatching },
-    { path: '/addpara', component: AddPara },
-    { path: '/mypara', component: MyPara },
     { path: '/stitching', component: Stitching },
     { path: '/detectface', component: DetectFace },
     { path: '/ocrprint', component: OcrPrint },
     { path: '/ocrval', component: OcrVal },
     { path: '/equalizehist', component: EqualizeHist },
     { path: '/ostusplit', component: OSTUSplit },
+
+
+    { path: '/kanjicut', component: KanjiCut },
   ]
 
 const router = createRouter({

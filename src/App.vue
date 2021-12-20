@@ -48,8 +48,8 @@
           <i class="el-icon-document"></i>
           <span>自然语言处理</span>
         </template>
-        <router-link to="/emotion">
-          <el-menu-item index="3-1">文本情绪分析</el-menu-item></router-link
+        <router-link to="/kanjicut">
+          <el-menu-item index="3-1">中文分词</el-menu-item></router-link
         >
       </el-sub-menu>
 
