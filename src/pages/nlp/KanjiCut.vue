@@ -32,18 +32,21 @@
       />
     </div>
   </div>
-  <br />  <br />
+  <br />
+  <br />
   <div>
-    <el-button type="primary" @click="analyse">分析</el-button>
+    <el-button type="primary" @click="analyse" :loading="analyse_loading"
+      >分析</el-button
+    >
   </div>
-    <br />  
-  <div> 
-      <el-input
-        v-model="output_text"
-        :rows="10"
-        type="textarea"
-        placeholder="分析结果"
-      />
+  <br />
+  <div>
+    <el-input
+      v-model="output_text"
+      :rows="10"
+      type="textarea"
+      placeholder="分析结果"
+    />
   </div>
 </template>
 
@@ -51,12 +54,13 @@
 export default {
   components: {},
   data: () => ({
-    current_params:  "",
+    current_params: "",
     params_list: Array(),
     model: "kanji_cut",
     file_num: 1,
     text: "",
-    output_text:"",
+    output_text: "",
+    analyse_loading: false,
   }),
 
   methods: {
@@ -109,6 +113,7 @@ export default {
     },
     delete_params() {},
     analyse() {
+      this.analyse_loading = true;
       const axios = require("axios");
       axios
         .post("/analyse", {
@@ -118,13 +123,16 @@ export default {
         })
         .then((response) => {
           var data = response.data;
-          this.output_text = data.output_text;
+
           if (data.code == 0) {
-             this.$message({
+            this.output_text = data.output_text;
+            this.analyse_loading = false;
+            this.$message({
               message: "分析成功",
               type: "success",
             });
           } else {
+            this.analyse_loading = false;
             this.$message({
               message: data.msg,
               type: "error",

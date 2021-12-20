@@ -71,6 +71,34 @@ export default {
         value: "scanning",
         label: "文档扫描",
       },
+      {
+        value: "detect_face",
+        label: "人脸检测",
+      },
+      {
+        value: "equalize_hist",
+        label: "直方图均衡化",
+      },
+      {
+        value: "ocr_print",
+        label: "打印体识别",
+      },
+      {
+        value: "ocr_val",
+        label: "验证码识别",
+      },
+      {
+        value: "stitching",
+        label: "图像拼接",
+      },
+      {
+        value: "OSTU_split",
+        label: "大津阈值法",
+      },
+      {
+        value:"kanji_cut",
+        label:"中文分词"
+      }
     ],
     select_model: "",
     params_list: [],
@@ -104,7 +132,7 @@ export default {
     deletePara() {
       const axios = require("axios");
       axios
-        .delete("/parameter/delete", {data:{id: this.select_params.id }})
+        .delete("/parameter/delete", { data: { id: this.select_params.id } })
         .then((response) => {
           var data = response.data;
           if (data.code == 0) {
@@ -127,13 +155,13 @@ export default {
           });
         });
     },
-   updatePara() {
+    updatePara() {
       const axios = require("axios");
       axios
         .put("/parameter/update", {
           id: this.select_params.id,
           value: this.select_params.value,
-          })
+        })
         .then((response) => {
           var data = response.data;
           if (data.code == 0) {

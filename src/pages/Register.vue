@@ -23,7 +23,7 @@
           type="text"
           v-model="form.nickname"
           auto-complete="off"
-          placeholder="姓名"
+          placeholder="昵称"
         ></el-input>
       </el-form-item>
       <el-form-item prop="password">
@@ -34,6 +34,7 @@
           placeholder="密码"
         ></el-input>
       </el-form-item>
+      <br />
       <el-form-item prop="repassword">
         <el-input
           type="password"
@@ -70,9 +71,60 @@ export default {
       },
       rules: {
         username: [
-          { required: true, message: "请输入用户名", trigger: "blur" },
+          {
+            required: true,
+            message: "请输入用户名",
+            trigger: ["blur", "change"],
+          },
+          {
+            pattern: "^[a-zA-Z0-9]{6,15}$",
+            message: "用户名为6-15位，包含大小写字母、数字",
+            trigger: ["blur", "change"],
+          },
         ],
-        password: [{ required: true, message: "请输入密码", trigger: "blur" }],
+        password: [
+          {
+            required: true,
+            message: "请输入密码",
+            trigger: ["blur", "change"],
+          },
+          {
+            pattern: "^[a-zA-Z0-9.@$!%*#_~?&^]{8,18}$",
+            message:
+              "密码为8-18位，包含大小写字母、数字、特殊字符（.@$!%*#_~?&）",
+            trigger: ["blur", "change"],
+          },
+        ],
+        nickname: [
+          {
+            required: true,
+            message: "请输入昵称",
+            trigger: ["blur", "change"],
+          },
+          {
+            pattern: "^[a-zA-Z0-9\u4e00-\u9fa5_-]{2,15}$",
+            message:
+              "昵称为2-15位，包含大小写字母、数字、中文、下划线、减号",
+            trigger: ["blur", "change"],
+          },
+        ],
+        repassword: [
+          {
+            required: true,
+            message: "请输入重复密码",
+            trigger: ["blur", "change"],
+          },
+          {
+            validator: (rule, value, callback) => {
+              if (value === this.form.password) {
+                callback();
+              } else {
+                callback(new Error("两次密码输入不一致"));
+              }
+            },
+            trigger: ["blur", "change"],
+          },
+        ],
       },
     };
   },
@@ -112,7 +164,10 @@ export default {
               });
             });
         } else {
-          console.log("error submit!");
+          this.$message({
+            message: "请检查输入",
+            type: "error",
+          });
           return false;
         }
       });
@@ -140,13 +195,23 @@ export default {
 </script>
 
 <style scoped>
+.background {
+  width: 100%;
+  height: 100%; /**宽高100%是为了图片铺满屏幕 */
+  z-index: -1;
+  position: absolute;
+}
+
 .register-container {
   width: 100%;
   height: 100%;
+  z-index: 1;
+  position: absolute;
 }
+
 .register-page {
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+  -webkit-border-radius: 15px;
+  border-radius: 30px;
   margin: 180px auto;
   width: 350px;
   padding: 35px 35px 15px;
@@ -154,6 +219,12 @@ export default {
   border: 1px solid #eaeaea;
   box-shadow: 0 0 25px #cac6c6;
 }
+
+.editline {
+  -webkit-border-radius: 15px;
+  border-radius: 30px;
+}
+
 label.el-checkbox.rememberme {
   margin: 0px 0px 15px;
   text-align: left;

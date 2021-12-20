@@ -31,6 +31,7 @@
           placeholder="密码"
         ></el-input>
       </el-form-item>
+      <br>
       <el-form-item style="width: 100%">
         <el-button
           type="primary"
@@ -51,7 +52,7 @@
 export default {
   data() {
     return {
-      imgSrc:require('../assets/main.jpeg'),
+      imgSrc: require("../assets/main.jpeg"),
       logining: false,
       form: {
         username: "",
@@ -59,9 +60,21 @@ export default {
       },
       rules: {
         username: [
-          { required: true, message: "请输入用户名", trigger: "blur" },
+          { required: true, message: "请输入用户名", trigger: ['blur', 'change'] },
+          {
+            pattern: "^[a-zA-Z0-9]{6,15}$",
+            message: "用户名为6-15位，包含大小写字母、数字",
+            trigger: ['blur', 'change'],
+          },
         ],
-        password: [{ required: true, message: "请输入密码", trigger: "blur" }],
+        password: [
+          { required: true, message: "请输入密码", trigger: ['blur', 'change'] },
+          {
+            pattern: "^[a-zA-Z0-9.@$!%*#_~?&^]{8,18}$",
+            message: "密码为8-18位，包含大小写字母、数字、特殊字符（.@$!%*#_~?&）",
+            trigger:['blur', 'change'],
+          },
+        ],
       },
     };
   },
@@ -100,40 +113,43 @@ export default {
               });
             });
         } else {
-          console.log("error submit!");
+          this.$message({
+            message: "请检查输入",
+            type: "error",
+          });
           return false;
         }
       });
     },
   },
   created() {
-      const axios = require("axios");
-      axios
-        .get("/user/me")
-        .then((response) => {
-          console.log(response);
-          var data = response.data;
-          if (data.code == 0) {
-            this.$router.push("/");
-          } 
-        })
-        .catch((error) => {
-          console.log(error);
-          this.logining = false;
-          this.$alert("" + error, "请求失败", {
-            confirmButtonText: "确定",
-          });
+    const axios = require("axios");
+    axios
+      .get("/user/me")
+      .then((response) => {
+        console.log(response);
+        var data = response.data;
+        if (data.code == 0) {
+          this.$router.push("/");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        this.logining = false;
+        this.$alert("" + error, "请求失败", {
+          confirmButtonText: "确定",
         });
+      });
   },
 };
 </script>
 
 <style scoped>
-.background{
-    width:100%;  
-    height:100%;  /**宽高100%是为了图片铺满屏幕 */
-    z-index:-1;
-    position: absolute;
+.background {
+  width: 100%;
+  height: 100%; /**宽高100%是为了图片铺满屏幕 */
+  z-index: -1;
+  position: absolute;
 }
 
 .login-container {
