@@ -11,8 +11,8 @@ import Register from './pages/Register.vue'
 import SiftMatching from './pages/cv/SiftMatching.vue'
 import AddPara from './pages/AddPara.vue'
 import MyPara from './pages/MyPara.vue'
-
-
+import AddDefault from './pages/AddDefault.vue'
+import DefaultPara from './pages/DefaultPara.vue'
 
 import Painting from './pages/cv/Painting.vue'
 import Reconstruct from './pages/cv/Reconstruct.vue'
@@ -39,6 +39,8 @@ const routes = [
     { path: '/register', component: Register },
     { path: '/addpara', component: AddPara },
     { path: '/mypara', component: MyPara },
+    { path: '/adddefault', component: AddDefault },
+    { path: '/defaultpara', component: DefaultPara },
 
     { path: '/painting', component: Painting },
     { path: '/reconstruct', component: Reconstruct },

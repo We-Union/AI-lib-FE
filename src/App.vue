@@ -71,11 +71,17 @@
           <i class="el-icon-files"></i>
           <span>参数管理</span>
         </template>
-        <router-link to="/mypara">
+        <router-link to="/mypara" v-if="this.user.type==0">
           <el-menu-item index="5-1">我的参数</el-menu-item></router-link
         >
-        <router-link to="/addpara">
+        <router-link to="/addpara" v-if="this.user.type==0">
           <el-menu-item index="5-2">新建参数</el-menu-item></router-link
+        >
+         <router-link to="/defaultpara" v-if="this.user.type==1">
+          <el-menu-item index="5-1">默认参数管理</el-menu-item></router-link
+        >
+          <router-link to="/adddefault" v-if="this.user.type==1">
+          <el-menu-item index="5-2">新建默认参数</el-menu-item></router-link
         >
       </el-sub-menu>
       <router-link to="/about">
