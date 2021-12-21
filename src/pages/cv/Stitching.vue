@@ -4,48 +4,54 @@
   <br />
   <br />
   <div class="image-upload">
+    上传图片1：
+
     <el-upload
-      ref="upload"
-      class="upload-demo"
+      ref="upload1"
+      class="upload"
       method="POST"
       action="/api/image/upload"
-      :auto-upload="false"
-      :limit="this.file_num"
+      :auto-upload="true"
+      :limit="1"
       :thumbnail-mode="true"
-      :on-success="handleSuccess"
+      :on-success="handleSuccess1"
       :on-error="handleError"
       name="file"
-      :file-list="this.file_list"
     >
-      <template #trigger>
-        <el-button size="small" type="primary">选择文件</el-button>
-      </template>
-      <el-button
-        style="margin-left: 10px"
-        size="small"
-        type="success"
-        @click="submitUpload"
-        >上传</el-button
-      >
+      <el-button size="small" type="primary">选择文件</el-button>
       <template #tip>
-        <div class="el-upload__tip">
-          jpg/png文件，不超过2M，最多可上传{{ file_num }}张图片
-        </div>
+        <div class="el-upload__tip">jpg/png文件，不超过2M</div>
       </template>
     </el-upload>
+     <br />
+    上传图片2：
+    <el-upload
+      ref="upload2"
+      class="upload"
+      method="POST"
+      action="/api/image/upload"
+      :auto-upload="true"
+      :limit="1"
+      :thumbnail-mode="true"
+      :on-success="handleSuccess2"
+      :on-error="handleError"
+      name="file"
+    >
+      <el-button size="small" type="primary">选择文件</el-button>
+      <template #tip>
+        <div class="el-upload__tip">jpg/png文件，不超过2M</div>
+      </template>
+    </el-upload>
+    <br />
   </div>
   <br />
   <div class="image-container">
-    <el-image
-      v-for="src in img_src"
-      :key="src"
-      :src="src"
-      style="width: 50%"
-    
-    >
+    <el-image v-for="src in img_src" :key="src" :src="src" style="width: 50%">
       <template #error>
         <div class="image-slot">
-          <el-icon><icon-picture /></el-icon>
+          <el-icon :size="200">
+            <i class="el-icon-picture" />
+          </el-icon>
         </div>
       </template>
     </el-image>
@@ -63,7 +69,7 @@
       </el-option>
     </el-select>
     <br />
-<br />
+    <br />
     <div class="json-editor">
       <el-input
         v-model="current_params.value"
@@ -79,12 +85,15 @@
       >分析</el-button
     >
   </div>
+
   <br />
   <div class="result-container">
     <el-image :src="result.output_img_url" style="width: 80%">
       <template #error>
         <div class="image-slot">
-          <el-icon><icon-picture /></el-icon>
+          <el-icon :size="200">
+            <i class="el-icon-picture" />
+          </el-icon>
         </div>
       </template>
     </el-image>
@@ -101,14 +110,13 @@
 export default {
   components: {},
   data: () => ({
-    current_params:  "",
+    current_params: "",
     params_list: Array(),
     model: "stitching",
     file_num: 2,
     img_src: Array(),
     result: Object(),
     analyse_loading: false,
-    file_list: Array(),
   }),
 
   methods: {
@@ -121,10 +129,8 @@ export default {
           var data = response.data;
           if (data.code == 0) {
             for (var i = 0; i < data.data.length; i++) {
-              console.log(data.data[i]);
               this.params_list.push(data.data[i]);
             }
-            //   console.log(this.params_list);
           } else {
             this.$message({
               message: data.msg,
@@ -161,7 +167,6 @@ export default {
     },
     delete_params() {},
     analyse() {
-      console.log(this.file_list)
       if (this.img_src.length != this.file_num) {
         this.$message({
           message: "请上传" + this.file_num + "张图片",
@@ -169,10 +174,10 @@ export default {
         });
         return;
       }
-        this.$message({
-              message: "正在分析，该项操作可能需要一定时间，请耐心等待",
-              type: "success",
-            });
+      this.$message({
+        message: "正在分析，该项操作可能需要一定时间，请耐心等待",
+        type: "success",
+      });
       this.analyse_loading = true;
       const axios = require("axios");
       axios
@@ -204,16 +209,14 @@ export default {
           });
         });
     },
-    submitUpload() {
-      this.img_src = [];
-      this.$refs.upload.submit();
-    },
-    handleSuccess(response, file, fileList) {
+    handleSuccess1(response, file, fileList) {
       var data = response;
       if (data.code == 0) {
-        this.img_src.push(
-          "http://"+window.location.host+"/api/image/download?file=" + response.data
-        );
+        this.img_src[0] =
+          "http://" +
+          window.location.host +
+          "/api/image/download?file=" +
+          response.data;
         this.$message({
           message: "上传成功",
           type: "success",
@@ -225,7 +228,32 @@ export default {
         });
       }
 
-      console.log(response);
+      response;
+      console.log("upload success");
+      console.log(file);
+      console.log(fileList);
+    },
+    handleSuccess2(response, file, fileList) {
+      var data = response;
+      if (data.code == 0) {
+        this.img_src[1] =
+          "http://" +
+          window.location.host +
+          "/api/image/download?file=" +
+          response.data;
+        this.$message({
+          message: "上传成功",
+          type: "success",
+        });
+      } else {
+        this.$message({
+          message: data.msg,
+          type: "error",
+        });
+      }
+
+      response;
+      console.log("upload success");
       console.log(file);
       console.log(fileList);
     },
@@ -234,14 +262,19 @@ export default {
         message: err,
         type: "error",
       });
-      console.log(err);
-      console.log(file);
-      console.log(fileList);
+      err;
+      file;
+      fileList;
     },
   },
   created() {
     this.get_default_params();
     this.get_my_params();
+  },
+  mounted() {
+    for (var i = 0; i < this.file_num; i++) {
+      this.img_src.push("");
+    }
   },
 };
 </script>

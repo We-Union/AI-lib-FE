@@ -3,14 +3,14 @@
     <br />
     选择模型：
     <el-select v-model="select_model" placeholder="选择模型">
-    <el-option
-      v-for="item in model_list"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value"
-    >
-    </el-option>
-  </el-select>
+      <el-option
+        v-for="item in model_list"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value"
+      >
+      </el-option>
+    </el-select>
     <br />
     输入名称：
     <br />
@@ -21,12 +21,7 @@
     输入参数：
     <br />
     <br />
-    <el-input
-      v-model="params"
-      :rows="10"
-      type="textarea"
-      placeholder="参数"
-    />
+    <el-input v-model="params" :rows="10" type="textarea" placeholder="参数" />
     <br />
     <br />
     <el-button @click="addPara()" type="primary">添加参数</el-button>
@@ -35,33 +30,32 @@
 </template>
 
 <script>
-import Common from "./Common.vue"
+import Common from "./Common.vue";
 export default {
   components: {},
   data: () => ({
     model_list: Common.model_list,
-    select_model:"",
+    select_model: "",
     name: String(),
     params: "",
   }),
 
   methods: {
-    setDefault(){
-      if(this.select_model=="")
-      {
+    setDefault() {
+      if (this.select_model == "") {
         this.$message({
-          message: '请选择模型',
-          type: 'error'
+          message: "请选择模型",
+          type: "error",
         });
         return;
       }
-     const axios = require("axios");
+      const axios = require("axios");
       axios
         .get("/parameter/default?model=" + this.select_model)
         .then((response) => {
           var data = response.data;
           if (data.code == 0) {
-            this.params=data.data.value;
+            this.params = data.data.value;
           } else {
             this.$message({
               message: data.msg,
@@ -76,10 +70,10 @@ export default {
         });
     },
     addPara() {
-      if(this.select_model == '' || this.name == '' || this.params == '') {
+      if (this.select_model == "" || this.name == "" || this.params == "") {
         this.$message({
-          message: '请输入完整信息',
-          type: 'error'
+          message: "请输入完整信息",
+          type: "error",
         });
         return;
       }
@@ -112,9 +106,6 @@ export default {
           });
         });
     },
-    
-      
-  
   },
 };
 </script>

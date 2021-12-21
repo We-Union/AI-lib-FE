@@ -9,27 +9,15 @@
       class="upload-demo"
       method="POST"
       action="/api/image/upload"
-      :auto-upload="false"
       :limit="this.file_num"
       :thumbnail-mode="true"
       :on-success="handleSuccess"
       :on-error="handleError"
       name="file"
     >
-      <template #trigger>
-        <el-button size="small" type="primary">选择文件</el-button>
-      </template>
-      <el-button
-        style="margin-left: 10px"
-        size="small"
-        type="success"
-        @click="submitUpload"
-        >上传</el-button
-      >
+      <el-button size="small" type="primary">选择文件</el-button>
       <template #tip>
-        <div class="el-upload__tip">
-          jpg/png文件，不超过2M，最多可上传{{ file_num }}张图片
-        </div>
+        <div class="el-upload__tip">jpg/png文件，不超过2M</div>
       </template>
     </el-upload>
   </div>
@@ -38,12 +26,15 @@
     <el-image :src="img_src" style="width: 50%">
       <template #error>
         <div class="image-slot">
-          <el-icon><icon-picture /></el-icon>
+          <el-icon :size="200">
+            <i class="el-icon-picture" />
+          </el-icon>
         </div>
       </template>
     </el-image>
   </div>
   <br />
+
   <div class="parameter-select">
     选择参数：
     <el-select v-model="current_params" placeholder="选择参数">
@@ -56,7 +47,7 @@
       </el-option>
     </el-select>
     <br />
- <br />
+    <br />
     <div class="json-editor">
       <el-input
         v-model="current_params.value"
@@ -64,44 +55,44 @@
         type="textarea"
         placeholder="选择参数"
       />
-
     </div>
   </div>
- <br />
+  <br />
   <div>
-    <el-button type="primary" @click="analyse" :loading="analyse_loading">分析</el-button>
+    <el-button type="primary" @click="analyse" :loading="analyse_loading"
+      >分析</el-button
+    >
   </div>
   <br />
   <div class="result-container">
-    <el-image :src="result.output_img_url" style="width: 50%" >
+    <el-image :src="result.output_img_url" style="width: 50%">
       <template #error>
-        <div class="image-slot">
-          <el-icon><icon-picture /></el-icon>
-        </div>
+        <el-icon :size="200">
+          <i class="el-icon-picture" />
+        </el-icon>
       </template>
-      </el-image>
+    </el-image>
   </div>
-   <el-input
-        v-model="result.output_text"
-        :rows="10"
-        type="textarea"
-        placeholder="result"
-      />
-
+  <el-input
+    v-model="result.output_text"
+    :rows="10"
+    type="textarea"
+    placeholder="result"
+  />
 </template>
 
 <script>
 export default {
   components: {},
   data: () => ({
-    current_params:  "",
+    current_params: "",
     params_list: Array(),
     model: "reconstruct",
     file_num: 1,
     img_src: "",
-    upload_array:Array(),
-    result:Object(),
-    analyse_loading:false,
+    upload_array: Array(),
+    result: Object(),
+    analyse_loading: false,
   }),
 
   methods: {
@@ -154,13 +145,9 @@ export default {
     },
     delete_params() {},
     analyse() {
-      this.$message({
-              message: "正在分析，该项操作可能需要一定时间，请耐心等待",
-              type: "success",
-            });
       this.analyse_loading = true;
       this.upload_array = [];
-      this.upload_array.push( "http://"+window.location.host+this.img_src);
+      this.upload_array.push("http://" + window.location.host + this.img_src);
       const axios = require("axios");
       axios
         .post("/analyse/", {
@@ -192,13 +179,12 @@ export default {
         });
     },
     submitUpload() {
-    
       this.$refs.upload.submit();
     },
     handleSuccess(response, file, fileList) {
       var data = response;
       if (data.code == 0) {
-         this.img_src = "/api/image/download?file=" + response.data;
+        this.img_src = "/api/image/download?file=" + response.data;
         this.$message({
           message: "上传成功",
           type: "success",
@@ -209,16 +195,16 @@ export default {
           type: "error",
         });
       }
-     
+
       console.log(response);
       console.log(file);
       console.log(fileList);
     },
     handleError(err, file, fileList) {
-          this.$message({
-          message: err,
-          type: "error",
-        });
+      this.$message({
+        message: err,
+        type: "error",
+      });
       console.log(err);
       console.log(file);
       console.log(fileList);
