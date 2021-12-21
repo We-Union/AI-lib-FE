@@ -1,54 +1,14 @@
 <template>
   <br />
-  选择并上传图片文件：
+  <div class="text-container"></div>
   <br />
+  <el-input
+    v-model="text"
+    :rows="10"
+    type="textarea"
+    placeholder="请输入文本"
+  />
   <br />
-  <div class="image-upload">
-    <el-upload
-      ref="upload"
-      class="upload-demo"
-      method="POST"
-      action="/api/image/upload"
-      :auto-upload="false"
-      :limit="this.file_num"
-      :thumbnail-mode="true"
-      :on-success="handleSuccess"
-      :on-error="handleError"
-      name="file"
-    >
-      <template #trigger>
-        <el-button size="small" type="primary">选择文件</el-button>
-      </template>
-      <el-button
-        style="margin-left: 10px"
-        size="small"
-        type="success"
-        @click="submitUpload"
-        >上传</el-button
-      >
-      <template #tip>
-        <div class="el-upload__tip">
-          jpg/png文件，不超过2M，最多可上传{{ file_num }}张图片
-        </div>
-      </template>
-    </el-upload>
-  </div>
-  <br />
-  <div class="image-container">
-    <el-image
-      v-for="src in img_src"
-      :key="src"
-      :src="src"
-      style="width: 50%"
-    
-    >
-      <template #error>
-        <div class="image-slot">
-          <el-icon><icon-picture /></el-icon>
-        </div>
-      </template>
-    </el-image>
-  </div>
   <br />
   <div class="parameter-select">
     选择参数：
@@ -62,7 +22,7 @@
       </el-option>
     </el-select>
     <br />
-<br />
+    <br />
     <div class="json-editor">
       <el-input
         v-model="current_params.value"
@@ -73,39 +33,33 @@
     </div>
   </div>
   <br />
+  <br />
   <div>
     <el-button type="primary" @click="analyse" :loading="analyse_loading"
       >分析</el-button
     >
   </div>
   <br />
-  <div class="result-container">
-    <el-image :src="result.output_img_url" style="width: 80%">
-      <template #error>
-        <div class="image-slot">
-          <el-icon><icon-picture /></el-icon>
-        </div>
-      </template>
-    </el-image>
+  <div>
+    <el-input
+      v-model="output_text"
+      :rows="10"
+      type="textarea"
+      placeholder="分析结果"
+    />
   </div>
-  <el-input
-    v-model="result.output_text"
-    :rows="10"
-    type="textarea"
-    placeholder="result"
-  />
 </template>
 
 <script>
 export default {
   components: {},
   data: () => ({
-    current_params:  "",
+    current_params: "",
     params_list: Array(),
-    model: "sift_matching",
-    file_num: 2,
-    img_src: Array(),
-    result: Object(),
+    model: "en2zh",
+    file_num: 1,
+    text: "",
+    output_text: "",
     analyse_loading: false,
   }),
 
@@ -159,35 +113,26 @@ export default {
     },
     delete_params() {},
     analyse() {
-      if (this.img_src.length != this.file_num) {
-        this.$message({
-          message: "请上传" + this.file_num + "张图片",
-          type: "error",
-        });
-        return;
-      }
-        this.$message({
-              message: "正在分析，该项操作可能需要一定时间，请耐心等待",
-              type: "success",
-            });
       this.analyse_loading = true;
       const axios = require("axios");
       axios
-        .post("/analyse/", {
+        .post("/analyse", {
           model: this.model,
           parameter: this.current_params.value,
-          data: this.img_src.toString(),
+          data: this.text,
         })
         .then((response) => {
-          this.analyse_loading = false;
           var data = response.data;
+
           if (data.code == 0) {
+            this.output_text = data.output_text;
+            this.analyse_loading = false;
             this.$message({
               message: "分析成功",
               type: "success",
             });
-            this.result = data;
           } else {
+            this.analyse_loading = false;
             this.$message({
               message: data.msg,
               type: "error",
@@ -195,45 +140,10 @@ export default {
           }
         })
         .catch((error) => {
-          this.analyse_loading = false;
           this.$alert("" + error, "请求失败", {
             confirmButtonText: "确定",
           });
         });
-    },
-    submitUpload() {
-      this.img_src = [];
-      this.$refs.upload.submit();
-    },
-    handleSuccess(response, file, fileList) {
-      var data = response;
-      if (data.code == 0) {
-        this.img_src.push(
-          "http://"+window.location.host+"/api/image/download?file=" + response.data
-        );
-        this.$message({
-          message: "上传成功",
-          type: "success",
-        });
-      } else {
-        this.$message({
-          message: data.msg,
-          type: "error",
-        });
-      }
-
-      console.log(response);
-      console.log(file);
-      console.log(fileList);
-    },
-    handleError(err, file, fileList) {
-      this.$message({
-        message: err,
-        type: "error",
-      });
-      console.log(err);
-      console.log(file);
-      console.log(fileList);
     },
   },
   created() {

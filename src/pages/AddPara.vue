@@ -39,7 +39,7 @@ export default {
   components: {},
   data: () => ({
     model_list: [
-      {
+{
         value: "sift_matching",
         label: "图片匹配",
       },
@@ -82,6 +82,22 @@ export default {
       {
         value:"kanji_cut",
         label:"中文分词"
+      },
+      {
+        value:"en2zh",
+        label:"英译中"
+      },
+      {
+        value:"zh2en",
+        label:"中译英"
+      },
+      {
+        value:"detect_mood",
+        label:"情绪检测"
+      },
+      {
+        value:"topic_classifier",
+        label:"话题分类"
       }
     ],
     select_model:"",

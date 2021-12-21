@@ -15,6 +15,7 @@
       :on-success="handleSuccess"
       :on-error="handleError"
       name="file"
+      :file-list="this.file_list"
     >
       <template #trigger>
         <el-button size="small" type="primary">选择文件</el-button>
@@ -107,6 +108,7 @@ export default {
     img_src: Array(),
     result: Object(),
     analyse_loading: false,
+    file_list: Array(),
   }),
 
   methods: {
@@ -159,6 +161,7 @@ export default {
     },
     delete_params() {},
     analyse() {
+      console.log(this.file_list)
       if (this.img_src.length != this.file_num) {
         this.$message({
           message: "请上传" + this.file_num + "张图片",
@@ -209,7 +212,7 @@ export default {
       var data = response;
       if (data.code == 0) {
         this.img_src.push(
-          "http://localhost:8000/image/download?file=" + response.data
+          "http://"+window.location.host+"/api/image/download?file=" + response.data
         );
         this.$message({
           message: "上传成功",

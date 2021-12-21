@@ -27,19 +27,19 @@
         <router-link to="/stitching">
           <el-menu-item index="2-5">图像拼接</el-menu-item></router-link
         >
-         <router-link to="/detectface">
+        <router-link to="/detectface">
           <el-menu-item index="2-6">人脸检测</el-menu-item></router-link
         >
-          <router-link to="/ocrprint">
+        <router-link to="/ocrprint">
           <el-menu-item index="2-7">打印体识别</el-menu-item></router-link
         >
-          <router-link to="/ocrval">
+        <router-link to="/ocrval">
           <el-menu-item index="2-8">验证码识别</el-menu-item></router-link
         >
-           <router-link to="/equalizehist">
+        <router-link to="/equalizehist">
           <el-menu-item index="2-9">直方图均衡化</el-menu-item></router-link
         >
-         <router-link to="/ostusplit">
+        <router-link to="/ostusplit">
           <el-menu-item index="2-10">大津阈值法</el-menu-item></router-link
         >
       </el-sub-menu>
@@ -51,6 +51,17 @@
         <router-link to="/kanjicut">
           <el-menu-item index="3-1">中文分词</el-menu-item></router-link
         >
+        <router-link to="/en2zh">
+          <el-menu-item index="3-2">英文转中文</el-menu-item></router-link
+        >
+        <router-link to="/zh2en">
+          <el-menu-item index="3-3">中文转英文</el-menu-item></router-link
+        >
+        <router-link to="/detectmood">
+          <el-menu-item index="3-4">情绪检测</el-menu-item></router-link
+        >
+        <router-link to="/topicclassifier">
+          <el-menu-item index="3-5">话题分类</el-menu-item></router-link>
       </el-sub-menu>
 
       <router-link to="/login">
@@ -71,16 +82,16 @@
           <i class="el-icon-files"></i>
           <span>参数管理</span>
         </template>
-        <router-link to="/mypara" v-if="this.user.type==0">
+        <router-link to="/mypara" v-if="this.user.type == 0">
           <el-menu-item index="5-1">我的参数</el-menu-item></router-link
         >
-        <router-link to="/addpara" v-if="this.user.type==0">
+        <router-link to="/addpara" v-if="this.user.type == 0">
           <el-menu-item index="5-2">新建参数</el-menu-item></router-link
         >
-         <router-link to="/defaultpara" v-if="this.user.type==1">
+        <router-link to="/defaultpara" v-if="this.user.type == 1">
           <el-menu-item index="5-1">默认参数管理</el-menu-item></router-link
         >
-          <router-link to="/adddefault" v-if="this.user.type==1">
+        <router-link to="/adddefault" v-if="this.user.type == 1">
           <el-menu-item index="5-2">新建默认参数</el-menu-item></router-link
         >
       </el-sub-menu>
