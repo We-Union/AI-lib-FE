@@ -64,15 +64,6 @@
     >
   </div>
   <br />
-  <div class="result-container">
-    <el-image :src="result.output_img_url" style="width: 50%">
-      <template #error>
-        <el-icon :size="200">
-          <i class="el-icon-picture" />
-        </el-icon>
-      </template>
-    </el-image>
-  </div>
   <el-input
     v-model="result.output_text"
     :rows="10"
