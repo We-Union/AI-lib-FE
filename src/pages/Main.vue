@@ -4,9 +4,9 @@
       <el-collapse accordion>
         <el-collapse-item
           v-for="model in models"
-          :key="model.name"
-          :title="model.title"
-          :name="model.name"
+          :key="model.value"
+          :title="model.label"
+          :name="model.value"
         >
           <h3>算法简介</h3>
           <div>{{ model.desc }}</div>
@@ -28,75 +28,12 @@
 </template>
 
 <script>
+import Common from "./Common.vue"
 export default {
   name: "Main",
   data() {
     return {
-      models: [
-        {
-          name: "sift_matching",
-          title: "图片匹配",
-          desc: "图片匹配使用了sift特征...",
-          params: [
-            {
-              name: "feature",
-              type: "string",
-              range: '"akaze", "kaze", "mser", "orb", "sift"',
-              default: '"sift"',
-              desc: "关键点特征",
-            },
-            {
-              name: "match_rule",
-              type: "string",
-              range: '"brute", "knn"',
-              default: "brute",
-              desc: "关键点匹配算法",
-            },
-          ],
-        },
-        {
-          name: "scanning",
-          title: "文档扫描",
-          desc: "文档扫描用于...",
-          params: [
-            {
-              name: "height",
-              type: "height",
-              range: ">0",
-              default: "500",
-              desc: "输出图片大小",
-            },
-          ],
-        },
-        {
-          name: "transform_to_painting",
-          title: "手绘风格转换",
-          desc: "...",
-          params: [
-            {
-              name: "height",
-              type: "height",
-              range: ">0",
-              default: "500",
-              desc: "输出图片大小",
-            },
-          ],
-        },
-        {
-          name: "reconstruct",
-          title: "超分辨率重建",
-          desc: "...",
-          params: [
-            {
-              name: "height",
-              type: "height",
-              range: ">0",
-              default: "500",
-              desc: "输出图片大小",
-            },
-          ],
-        },
-      ],
+      models:Common.model_list,
     };
   },
 };

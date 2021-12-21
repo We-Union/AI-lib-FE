@@ -35,71 +35,11 @@
 </template>
 
 <script>
+import Common from "./Common.vue"
 export default {
   components: {},
   data: () => ({
-    model_list: [
-{
-        value: "sift_matching",
-        label: "图片匹配",
-      },
-      {
-        value: "transform_to_painting",
-        label: "图片手绘风格转换",
-      },
-      {
-        value: "reconstruct",
-        label: "超分辨率重建",
-      },
-      {
-        value: "scanning",
-        label: "文档扫描",
-      },
-      {
-        value: "detect_face",
-        label: "人脸检测",
-      },
-      {
-        value: "equalize_hist",
-        label: "直方图均衡化",
-      },
-      {
-        value: "ocr_print",
-        label: "打印体识别",
-      },
-      {
-        value: "ocr_val",
-        label: "验证码识别",
-      },
-      {
-        value: "stitching",
-        label: "图像拼接",
-      },
-      {
-        value: "OSTU_split",
-        label: "大津阈值法",
-      },
-      {
-        value:"kanji_cut",
-        label:"中文分词"
-      },
-      {
-        value:"en2zh",
-        label:"英译中"
-      },
-      {
-        value:"zh2en",
-        label:"中译英"
-      },
-      {
-        value:"detect_mood",
-        label:"情绪检测"
-      },
-      {
-        value:"topic_classifier",
-        label:"话题分类"
-      }
-    ],
+    model_list: Common.model_list,
     select_model:"",
     name: String(),
     params: "",
