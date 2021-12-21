@@ -87,7 +87,7 @@ export default {
   data: () => ({
     current_params: "",
     params_list: Array(),
-    model: "painting",
+    model: "transform_to_painting",
     file_num: 1,
     img_src: "",
     upload_array: Array(),
