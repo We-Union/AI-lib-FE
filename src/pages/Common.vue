@@ -4,7 +4,7 @@ const model_list = [
   {
     value: "transform_to_painting",
     label: "图片手绘风格转换",
-    desc: ".",
+    desc: "图片手绘风格转换使用了XXX方法，可以做到XXX",
     params: [
       {
         name: "depth",

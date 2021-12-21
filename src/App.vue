@@ -7,7 +7,7 @@
           <span>主页</span>
         </el-menu-item>
       </router-link>
-      <el-sub-menu index="2">
+      <el-sub-menu index="2"  v-if="logined">
         <template #title>
           <i class="el-icon-camera"></i>
           <span>视觉算法</span>
@@ -43,12 +43,12 @@
           <el-menu-item index="2-10">大津阈值法</el-menu-item></router-link
         >
       </el-sub-menu>
-      <el-sub-menu index="3">
+      <el-sub-menu index="3"  v-if="logined">
         <template #title>
           <i class="el-icon-document"></i>
           <span>自然语言处理</span>
         </template>
-        <router-link to="/kanjicut">
+        <router-link to="/kanjicut" >
           <el-menu-item index="3-1">中文分词</el-menu-item></router-link
         >
         <router-link to="/en2zh">
