@@ -16,6 +16,7 @@
           v-model="form.username"
           auto-complete="off"
           placeholder="用户名"
+           @keyup.enter="handleSubmit"
         ></el-input>
       </el-form-item>
       <el-form-item prop="nickname">
@@ -24,6 +25,7 @@
           v-model="form.nickname"
           auto-complete="off"
           placeholder="昵称"
+           @keyup.enter="handleSubmit"
         ></el-input>
       </el-form-item>
       <el-form-item prop="password">
@@ -32,6 +34,7 @@
           v-model="form.password"
           auto-complete="off"
           placeholder="密码"
+           @keyup.enter="handleSubmit"
         ></el-input>
       </el-form-item>
       <br />
@@ -41,6 +44,7 @@
           v-model="form.repassword"
           auto-complete="off"
           placeholder="重复密码"
+           @keyup.enter="handleSubmit"
         ></el-input>
       </el-form-item>
       <el-form-item style="width: 100%">

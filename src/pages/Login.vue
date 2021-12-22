@@ -21,6 +21,7 @@
           auto-complete="off"
           placeholder="用户名"
           class="editline"
+           @keyup.enter="handleSubmit"
         ></el-input>
       </el-form-item>
       <el-form-item prop="password">
@@ -29,6 +30,7 @@
           v-model="form.password"
           auto-complete="off"
           placeholder="密码"
+          @keyup.enter="handleSubmit"
         ></el-input>
       </el-form-item>
       <br>
