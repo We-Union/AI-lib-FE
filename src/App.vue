@@ -109,7 +109,7 @@
       </router-link>
     </el-menu>
     <div class="main-view">
-      <router-view></router-view>
+      <router-view ></router-view>
     </div>
   </div>
 </template>

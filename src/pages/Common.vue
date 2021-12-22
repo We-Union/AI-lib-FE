@@ -336,6 +336,13 @@ const model_list = [
     params: [
     ],
   },
+    {
+    value: "talk_to_chatbot",
+    label: "聊天机器人",
+    desc: "",
+    params: [
+    ],
+  },
 ];
 export default {
   model_list,
