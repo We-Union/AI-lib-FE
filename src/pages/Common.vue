@@ -321,6 +321,21 @@ const model_list = [
       },
     ],
   },
+    {
+    value: "generate_wordcloud",
+    label: "生成词云",
+    desc: "",
+    params: [
+     
+    ],
+  },
+    {
+    value: "visual_wordvec",
+    label: "中文词向量",
+    desc: "",
+    params: [
+    ],
+  },
 ];
 export default {
   model_list,

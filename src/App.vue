@@ -62,6 +62,12 @@
         >
         <router-link to="/topicclassifier">
           <el-menu-item index="3-5">话题分类</el-menu-item></router-link>
+           <router-link to="/generatewordcloud">
+          <el-menu-item index="3-6">生成词云</el-menu-item></router-link>
+           <router-link to="/visualwordvec">
+          <el-menu-item index="3-7">中文词向量表示</el-menu-item></router-link>
+             <router-link to="/talktochatbot">
+          <el-menu-item index="3-8">聊天机器人</el-menu-item></router-link>
       </el-sub-menu>
 
       <router-link to="/login">

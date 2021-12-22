@@ -30,6 +30,10 @@ import En2Zh from './pages/nlp/En2Zh.vue'
 import Zh2En from './pages/nlp/Zh2En.vue'
 import DetectMood from './pages/nlp/DetectMood.vue'
 import TopicClassifier from './pages/nlp/TopicClassifier.vue'
+import GenerateWordcloud from './pages/nlp/GenerateWordcloud.vue'
+import VisualWordvec from './pages/nlp/VisualWordvec.vue'
+import TalkToChatbot from './pages/nlp/TalkToChatbot.vue'
+
 
 import { createRouter, createWebHashHistory } from 'vue-router'
  
@@ -63,6 +67,9 @@ const routes = [
     { path: '/zh2en', component: Zh2En },
     { path: '/detectmood', component: DetectMood },
     { path: '/topicclassifier', component: TopicClassifier },
+    { path: '/generatewordcloud', component: GenerateWordcloud },
+    { path: '/visualwordvec', component: VisualWordvec },
+    { path: '/talktochatbot', component: TalkToChatbot },
   ]
 
 const router = createRouter({
