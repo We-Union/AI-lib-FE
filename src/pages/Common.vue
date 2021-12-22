@@ -4,7 +4,7 @@ const model_list = [
   {
     value: "transform_to_painting",
     label: "图片手绘风格转换",
-    desc: "图片手绘风格转换使用了XXX方法，可以做到XXX",
+    desc: "将图片转化为手绘风格，尽量使用二次元图片",
     params: [
       {
         name: "depth",
@@ -53,7 +53,7 @@ const model_list = [
   {
     value: "scanning",
     label: "文档扫描",
-    desc: ".",
+    desc: "定位图片中的矩形",
     params: [
       {
         name: "eight",
@@ -67,7 +67,7 @@ const model_list = [
   {
     value: "sift_matching",
     label: "图片匹配",
-    desc: "图片匹配使用了sift特征...",
+    desc: "找出两张图片中匹配的地方",
     params: [
       {
         name: "feature",
@@ -103,7 +103,7 @@ const model_list = [
   {
     value: "reconstruct",
     label: "超分辨率重建",
-    desc: ".",
+    desc: "利用神经网络，提高图片分辨率",
     params: [
       {
         name: "device",
@@ -131,7 +131,7 @@ const model_list = [
   {
     value: "stitching",
     label: "图像拼接",
-    desc: ".",
+    desc: "将两张图片进行拼接",
     params: [
       {
         name: "feature",
@@ -159,7 +159,7 @@ const model_list = [
   {
     value: "detect_face",
     label: "人脸检测",
-    desc: ".",
+    desc: "检测图片中的人脸",
     params: [
       {
         name: "method",
@@ -202,19 +202,19 @@ const model_list = [
   {
     value: "ocr_print",
     label: "打印体识别",
-    desc: ".",
+    desc: "OCR，只支持打印体",
     params: [],
   },
   {
     value: "ocr_val",
     label: "验证码识别",
-    desc: ".",
+    desc: "OCR，支持验证码",
     params: [],
   },
   {
     value: "equalize_hist",
     label: "直方图均衡化",
-    desc: ".",
+    desc: "对图片进行直方图均衡化",
     params: [
       {
         name: "local",
@@ -242,7 +242,7 @@ const model_list = [
   {
     value: "OSTU_split",
     label: "大津阈值法",
-    desc: ".",
+    desc: "对图片进行大津阈值法分割",
     params: [
       {
         name: "blur_size",
@@ -270,7 +270,7 @@ const model_list = [
   {
     value: "kanji_cut",
     label: "中文分词",
-    desc: ".",
+    desc: "对中文进行分词",
     params: [
       {
         name: "spliter",
@@ -284,19 +284,19 @@ const model_list = [
   {
     value: "en2zh",
     label: "英译中",
-    desc: ".",
+    desc: "英译中",
     params: [],
   },
   {
     value: "zh2en",
     label: "中译英",
-    desc: ".",
+    desc: "中译英",
     params: [],
   },
   {
     value: "detect_mood",
     label: "情绪检测",
-    desc: ".",
+    desc: "检测文本中的情绪",
     params: [
       {
         name: "out_dict_str",
@@ -310,7 +310,7 @@ const model_list = [
   {
     value: "topic_classifier",
     label: "话题分类",
-    desc: "",
+    desc: "分析输入文本的话题",
     params: [
       {
         name: "out_dict_str",
@@ -324,22 +324,114 @@ const model_list = [
     {
     value: "generate_wordcloud",
     label: "生成词云",
-    desc: "",
+    desc: "生成词云图片",
     params: [
-     
+           {
+        name: "lag",
+        type: "string",
+        range: "\"zh\", \"en\"",
+        default: "\"zh\"",
+        desc: "分词的语言，\"zh\"代表中文，\"en\"代表英文",
+      },
+      {
+        name: "punc",
+        type: "bool",
+        range: "true/false",
+        default: "true",
+        desc: "是否进行冗余词性去除",
+      },
+      {
+        name: "width",
+        type: "int",
+        range: "> 0",
+        default: "600",
+        desc: "词云图的宽度",
+      },
+      {
+        name: "height",
+        type: "int",
+        range: "> 0",
+        default: "200",
+        desc: "词云图的高度",
+      },
+      {
+        name: "stop_words",
+        type: "可迭代对象",
+        range: "...",
+        default: "None",
+        desc: "停用词",
+      },
+      {
+        name: "max_words",
+        type: "int",
+        range: "> 0",
+        default: "200",
+        desc: "词云中最多存在的词语数量",
+      },
+      {
+        name: "background_color",
+        type: "string",
+        range: "\"white\", \"black\", \"blue\", \"purple\", \"green\", \"yellow\", \"orange\", \"pink\", \"red\", \"gray\", \"cyan\"",
+        default: "\"white\"",
+        desc: "词云图背景颜色",
+      },
+
     ],
   },
     {
     value: "visual_wordvec",
     label: "中文词向量",
-    desc: "",
+    desc: "计算中文词向量并可视化",
     params: [
+            {
+        name: "decomposition_method",
+        type: "string",
+        range: "\"pca\", \"tsne\", \"mds\", \"isomap\"",
+        default: "\"pca\"",
+        desc: "降维算法",
+      },
+      {
+        name: "s",
+        type: "int",
+        range: "> 0",
+        default: "120",
+        desc: "散点半径",
+      },
+      {
+        name: "alpha",
+        type: "float",
+        range: "> 0 && < 1",
+        default: "0.9",
+        desc: "散点透明度",
+      },
+      {
+        name: "fontsize",
+        type: "int",
+        range: "> 0",
+        default: "12",
+        desc: "标识词向量的label的字号",
+      },
+      {
+        name: "height",
+        type: "int",
+        range: "> 0",
+        default: "10",
+        desc: "生成图的高度",
+      },
+      {
+        name: "width",
+        type: "int",
+        range: "> 0",
+        default: "12",
+        desc: "生成图的宽度",
+      },
+
     ],
   },
     {
     value: "talk_to_chatbot",
     label: "聊天机器人",
-    desc: "",
+    desc: "IMDB风格聊天机器人",
     params: [
     ],
   },
