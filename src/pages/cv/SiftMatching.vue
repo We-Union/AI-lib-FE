@@ -1,12 +1,24 @@
 <template>
+  <center><h1>图像匹配</h1></center>
   <br />
-  选择并上传图片文件：
-  <br />
-  <br />
-  <div class="image-upload">
-    上传图片1：
 
-    <el-upload
+    <div class="image-container">
+      <el-image v-for="src in img_src" :key="src" :src="src" style="width: 50%">
+        <template #error>
+          <div class="image-slot">
+            <el-icon :size="200">
+
+            </el-icon>
+          </div>
+        </template>
+      </el-image>
+    </div>
+
+   <el-row>
+    <el-col :span="12">
+      <div class="parent">
+        
+      <el-upload
       ref="upload1"
       class="upload"
       method="POST"
@@ -18,14 +30,19 @@
       :on-error="handleError"
       name="file"
     >
-      <el-button size="small" type="primary">选择文件</el-button>
+      <el-button size="small" type="primary">上传待匹配图片</el-button>
       <template #tip>
         <div class="el-upload__tip">jpg/png文件，不超过2M</div>
       </template>
     </el-upload>
-     <br />
-    上传图片2：
-    <el-upload
+
+      </div>
+    </el-col>
+    <el-col :span="12">
+
+      <div class="parent">
+        
+         <el-upload
       ref="upload2"
       class="upload"
       method="POST"
@@ -37,26 +54,59 @@
       :on-error="handleError"
       name="file"
     >
-      <el-button size="small" type="primary">选择文件</el-button>
+      <el-button size="small" type="primary">上传整体图片</el-button>
       <template #tip>
         <div class="el-upload__tip">jpg/png文件，不超过2M</div>
       </template>
     </el-upload>
-    <br />
-  </div>
-  <br />
-  <div class="image-container">
-    <el-image v-for="src in img_src" :key="src" :src="src" style="width: 50%">
-      <template #error>
-        <div class="image-slot">
-          <el-icon :size="200">
-            <i class="el-icon-picture" />
-          </el-icon>
+        
+      </div>   
+        
+    </el-col>
+  </el-row>
+
+  <br>
+  <br>
+
+
+  <el-row>
+    <el-col :span="24">
+      <div class="parent">
+        
+          <div class="result-container">
+            <el-image :src="result.output_img_url" style="width: 80%">
+              <template #error>
+                <div class="image-slot">
+                  <el-icon :size="200">
+                  </el-icon>
+                </div>
+              </template>
+            </el-image>
+          </div>
+
+      </div>
+    </el-col>
+  </el-row>
+  
+  <br>
+
+  <el-row>
+    <el-col :span="24">
+      <div class="parent">
+        <div>
+            <el-button type="primary" @click="analyse" :loading="analyse_loading"
+              >运行AI算法</el-button
+            >
         </div>
-      </template>
-    </el-image>
-  </div>
-  <br />
+      </div>
+    </el-col>
+  </el-row>
+
+
+  <br>
+
+
+  
   <div class="parameter-select">
     选择参数：
     <el-select v-model="current_params" placeholder="选择参数">
@@ -79,31 +129,8 @@
       />
     </div>
   </div>
-  <br />
-  <div>
-    <el-button type="primary" @click="analyse" :loading="analyse_loading"
-      >分析</el-button
-    >
-  </div>
+  <br>
 
-  <br />
-  <div class="result-container">
-    <el-image :src="result.output_img_url" style="width: 80%">
-      <template #error>
-        <div class="image-slot">
-          <el-icon :size="200">
-            <i class="el-icon-picture" />
-          </el-icon>
-        </div>
-      </template>
-    </el-image>
-  </div>
-  <el-input
-    v-model="result.output_text"
-    :rows="10"
-    type="textarea"
-    placeholder="result"
-  />
 </template>
 
 <script>

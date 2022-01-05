@@ -1,39 +1,75 @@
 <template>
+  <center><h1>图片手绘风格转换</h1></center>
   <br />
-  选择并上传图片文件：
-  <br />
-  <br />
-  <div class="image-upload">
-    <el-upload
-      ref="upload"
-      class="upload-demo"
-      method="POST"
-      action="/api/image/upload"
-      :limit="this.file_num"
-      :thumbnail-mode="true"
-      :on-success="handleSuccess"
-      :on-error="handleError"
-      name="file"
-    >
-      <el-button size="small" type="primary">选择文件</el-button>
-      <template #tip>
-        <div class="el-upload__tip">jpg/png文件，不超过2M</div>
-      </template>
-    </el-upload>
-  </div>
-  <br />
-  <div class="image-container">
-    <el-image :src="img_src" style="width: 50%">
-      <template #error>
-        <div class="image-slot">
-          <el-icon :size="200">
-            <i class="el-icon-picture" />
-          </el-icon>
+
+  <el-row>
+    <el-col :span="12">
+      <div class="parent">
+        <div class="image-container">
+          <el-image :src="img_src" style="width: 50%">
+            <template #error>
+              <div class="image-slot">
+                <el-icon :size="200">
+                </el-icon>
+              </div>
+            </template>
+          </el-image>
         </div>
-      </template>
-    </el-image>
-  </div>
-  <br />
+      </div>
+    </el-col>
+    <el-col :span="12">
+
+      <div class="parent">
+        <div class="result-container">
+          <el-image :src="result.output_img_url" style="width: 50%">
+            <template #error>
+              <el-icon :size="200">
+              </el-icon>
+            </template>
+          </el-image>
+        </div>   
+      </div>   
+        
+    </el-col>
+  </el-row>
+  
+  <el-row>
+    <el-col :span="12">
+      <div class="parent">
+        <div class="image-upload">
+          <el-upload
+            ref="upload"
+            class="upload-demo"
+            method="POST"
+            action="/api/image/upload"
+            :limit="this.file_num"
+            :thumbnail-mode="true"
+            :on-success="handleSuccess"
+            :on-error="handleError"
+            name="file"
+          >
+            <el-button size="small" type="primary">上传需要处理的图片</el-button>
+            <template #tip>
+              <div class="el-upload__tip">jpg/png文件，不超过2M</div>
+            </template>
+          </el-upload>
+        </div>
+      </div>
+
+    </el-col>
+    <el-col :span="12">
+      <div class="parent">
+        <div>
+          <el-button type="primary" @click="analyse" :loading="analyse_loading">
+            运行AI算法
+          </el-button>
+        </div>
+      </div>
+    </el-col>
+  </el-row>
+
+  <br>
+  <br>
 
   <div class="parameter-select">
     选择参数：
@@ -53,33 +89,20 @@
         v-model="current_params.value"
         :rows="10"
         type="textarea"
-        placeholder="选择参数"
+        placeholder="选择或填入参数"
       />
     </div>
   </div>
   <br />
-  <div>
-    <el-button type="primary" @click="analyse" :loading="analyse_loading"
-      >分析</el-button
-    >
-  </div>
-  <br />
-  <div class="result-container">
-    <el-image :src="result.output_img_url" style="width: 50%">
-      <template #error>
-        <el-icon :size="200">
-          <i class="el-icon-picture" />
-        </el-icon>
-      </template>
-    </el-image>
-  </div>
-  <el-input
-    v-model="result.output_text"
-    :rows="10"
-    type="textarea"
-    placeholder="result"
-  />
+
 </template>
+
+<style>
+  .parent{
+    display:flex;
+    justify-content:center;
+  }
+</style>
 
 <script>
 export default {
