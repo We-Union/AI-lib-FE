@@ -1,10 +1,11 @@
 <template>
   <div class="main">
+    <center><h1>AI赋能通用图像文本处理网站</h1></center>
     <div class="video-contianer">
       <center>
       <vue3VideoPlay
         v-bind="options"
-        poster="https://iknow-pic.cdn.bcebos.com/6f061d950a7b0208701401e06ed9f2d3562cc8d5"
+        poster="http://110.40.176.151/media/poster.png"
       />
       </center>
     </div>

@@ -3,9 +3,8 @@ module.exports = {
         disableHostCheck: true,
         proxy: {
             '/api': {
-                // 此处的写法，目的是为了 将 /api 替换成 https://www.baidu.com/
-                target: 'http://localhost:8000/',
-                // 允许跨域
+            
+                target: 'http://110.40.176.151/api',
                 changeOrigin: true,
                 ws: true,
                 pathRewrite: {

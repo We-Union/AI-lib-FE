@@ -25,7 +25,7 @@
     <br />
     <br />
     <el-button @click="addPara()" type="primary">添加参数</el-button>
-    <el-button @click="setDefault()" type="warning">重置为默认参数</el-button>
+    <el-button @click="setDefault()" type="warning">查询默认参数</el-button>
   </div>
 </template>
 
